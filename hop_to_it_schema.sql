@@ -11,8 +11,7 @@ CREATE TABLE BREWERY
 	zipcode CHAR(12),
 	region_id INT(9) NOT NULL,
 	history_description VARCHAR (100),
-	PRIMARY KEY(brewery_id),
-	FOREIGN KEY(region_id) REFERENCES REGION(region_id)
+	PRIMARY KEY(brewery_id)
 );
 
 CREATE TABLE BEER_FOOD
@@ -20,8 +19,6 @@ CREATE TABLE BEER_FOOD
 	food_id INT(10) NOT NULL,
 	beer_id INT(10) NOT NULL,
 	PRIMARY KEY (food_id, beer_id)
-	FOREIGN KEY (food_id) REFERENCES FOOD_PAIRING(food_id),
-	FOREIGN KEY (beer_id) REFERENCES BEER(beer_id)
 );
 
 CREATE TABLE FOOD_PAIRING
@@ -35,18 +32,14 @@ CREATE TABLE BEER_FOR_SALE
 (
 	sales_id CHAR(50) NOT NULL,
 	beer_id INT(10) NOT NULL,
-	PRIMARY KEY (sales_id, beer_id),
-	FOREIGN KEY (beer_id) REFERENCES BEER(beer_id),
-	FOREIGN KEY (sales_id) REFERENCES SALES_LOCATION(sales_id)
+	PRIMARY KEY (sales_id, beer_id)
 );
 
 CREATE TABLE BEER_IN_BARS
 (
 	bar_id INT(9) NOT NULL,
 	beer_id INT(10) NOT NULL,
-	PRIMARY KEY (bar_id, beer_id),
-	FOREIGN KEY (bar_id) REFERENCES BAR(bar_id),
-	FOREIGN KEY (beer_id) REFERENCES BEER(beer_id)
+	PRIMARY KEY (bar_id, beer_id)
 );
 
 CREATE TABLE SALES_LOCATION
@@ -71,10 +64,7 @@ CREATE TABLE BEER
 	time_of_year_availability_id VARCHAR(30),
 	price_range_code VARCHAR(20),
 	brewery_id INT(30) NOT NULL,
-	PRIMARY KEY(beer_id),
-	FOREIGN KEY (style_id) REFERENCES BEER_STYLE(style_id),
-	FOREIGN KEY (brewery_id) REFERENCES BREWERY(brewery_id),
-	FOREIGN KEY (price_range_code) REFERENCES PRICE_RANGE(price_range_code)
+	PRIMARY KEY(beer_id)
 );
 
 CREATE TABLE BAR
@@ -117,9 +107,7 @@ CREATE TABLE BEER_FOR_SEASON
 (
 	beer_id INT(10) NOT NULL,
 	time_of_year_availability_id INT(9) NOT NULL,
-	PRIMARY KEY(beer_id, time_of_year_availability_id),
-	FOREIGN KEY (beer_id) REFERENCES BEER(beer_id),
-	FOREIGN KEY (time_of_year_availability_id) REFERENCES SEASONAL_AVAILABILITY(time_of_year_availability_id)
+	PRIMARY KEY(beer_id, time_of_year_availability_id)
 );
 
 CREATE TABLE PERSON
@@ -142,7 +130,5 @@ CREATE TABLE LIKES
 (
 	username VARCHAR(22) NOT NULL,
 	beer_id INT(10) NOT NULL,
-	PRIMARY KEY (person_id, beer_id),
-	FOREIGN KEY (beer_id) REFERENCES BEER(beer_id),
-	FOREIGN KEY (username) REFERENCES PERSON(username)
+	PRIMARY KEY (username, beer_id)
 );
