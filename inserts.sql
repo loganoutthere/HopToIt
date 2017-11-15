@@ -1,4 +1,15 @@
 --Insert commands
+--sales_id    format  sl001...  char
+--brewery_id  format  0001...   int
+--food_id     format  001...    int
+--beer_id     format  001...    int
+--bar_id      format  01...     int
+--style_id    format  bs001...  char
+--region_id   format  001...    int
+--username    format  UNKNONW   VARCHAR
+--price_range_code  format  1...  int
+--time_of_year_availability_id  format  001...  int
+
 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
 (0001, 'Wasatch_Brewery', 1986, 801-783-1127, 'www.wasatchbeers.com', 'Salt_Lake_City', 'United_States', 'Utah', 84111, 01, 'This Brewery was founded in 1986 to satisfy the most discerning beer enthusiasts. “Where''s the beer? Where are the breweries?” Those were among the first thoughts Greg Schirf had after moving to Utah from Milwaukee in the early 80''s. Incredibly, drinking and brewing were all but forbidden. Greg took matters into his own hands and did what any self-respecting midwesterner would do: He started a brewery. Wasatch was the very first brewery in Utah – and one of the first craft brewers in all of the U.S. – brewing award-winning brews since 1986.');
