@@ -90,8 +90,8 @@ CREATE TABLE BEER_STYLE
 CREATE TABLE REGION
 (
 	region_id INT(9) NOT NULL,
-	region_name VARCHAR(15) NOT NULL,
-	region_states VARCHAR(30),
+	region_name VARCHAR(120) NOT NULL,
+	region_states LONGTEXT,
 	PRIMARY KEY(region_id)
 );
 

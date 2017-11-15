@@ -12,6 +12,22 @@
 --time_of_year_availability_id  format  001...  int
 */
 
+/*
+--
+-- Dumping data for table 'REGION'
+--
+*/
+
+INSERT INTO REGION(region_id, region_name, region_states) VALUES (001, 'Western Mountain Region', 'Utah, Colorado, Nevada, New Mexico, Idaho');
+
+INSERT INTO REGION(region_id, region_name, region_states) VALUES (002, 'Eastern Region', 'New York, New Hampsire, Delaware');
+
+/*
+--
+-- Dumping data for table 'BREWERY'
+--
+*/
+
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
 (0001, 'Wasatch_Brewery', '1986-01-01', '801-783-1127', 'www.wasatchbeers.com', 'Salt_Lake_City', 'United_States', 'Utah', '84111', 01, 'This Brewery was founded in 1986 to satisfy the most discerning beer enthusiasts. “Where''s the beer? Where are the breweries?” Those were among the first thoughts Greg Schirf had after moving to Utah from Milwaukee in the early 80''s. Incredibly, drinking and brewing were all but forbidden. Greg took matters into his own hands and did what any self-respecting midwesterner would do: He started a brewery. Wasatch was the very first brewery in Utah – and one of the first craft brewers in all of the U.S. – brewing award-winning brews since 1986.');
 
@@ -60,15 +76,7 @@ INSERT INTO SEASONAL_AVAILABILITY(time_of_year_availability_id, start_date_of_av
 
 INSERT INTO SEASONAL_AVAILABILITY(time_of_year_availability_id, start_date_of_availability, end_date_of_availability) VALUES (002, 'June', 'December');
 
-/*
---
--- Dumping data for table 'REGION'
---
-*/
 
-INSERT INTO REGION(region_id, region_name, region_states) VALUES (001, 'Western Mountain Region', 'Utah, Colorado, Nevada, New Mexico, Idaho');
-
-INSERT INTO REGION(region_id, region_name, region_states) VALUES (002, 'Eastern Region', 'New York, New Hampsire, Delaware');
 
 /*
 --
