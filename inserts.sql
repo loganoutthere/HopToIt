@@ -34,12 +34,11 @@ INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
 (0002, 'Epic_Brewery', '2008-01-01', '801-906-0123', 'www.epicbrewing.com', 'Salt_Lake_City', 'United_States', 'Utah', '84111', 01, 'David Cole and Peter Erickson are the founders and co-owners of Epic Brewing Company. Cole and Erickson, originally from California, started an international aquaculture company in Utah in 1992. In 2008, Utah law changed allowing these two entrepreneurs to pursue their longtime dream of opening a strong beer microbrewery in Utah, like those they frequented in the Golden State.');
 
-
+INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
+(0003, 'Fisher Brewery', '2017-01-25', '801-487-2337', 'www.fisherbeer.com/', 'Salt Lake City', 'United States', 'Utah', '84101', 01, 'Originally founded in Salt Lake City in 1884, Fisher Brewing Company has returned as an employee owned, community-focused craft brewery. Located in the Granary District of Salt Lake City, we serve fine ales and lagers on draft in our brewery taproom featuring a rotating cast of local food trucks.');
 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
-(3, ‘Left Hand Brewing’,'1980-02-23', '(303) 772-0258', ‘http://lefthandbrewing.com/’, ‘United States’, ‘Colorado’,  80501, 01, 'Living here in our great state requires great balance — there’s just simply too much to do! Soak in over 300 days of sunshine a year. Catch a show at Red Rocks. Climb to the top of 14,255′ Longs Peak. Catch an Avs or Rockies game. Drop into some fresh powder at A-Basin. Tee up on the first hole at Haystack Mountain.');
-
-
+(0004, 'Left Hand Brewing','1980-02-23', '(303) 772-0258', 'http://lefthandbrewing.com/', 'United States', 'Colorado',  80501, 01, 'Living here in our great state requires great balance — there’s just simply too much to do! Soak in over 300 days of sunshine a year. Catch a show at Red Rocks. Climb to the top of 14,255′ Longs Peak. Catch an Avs or Rockies game. Drop into some fresh powder at A-Basin. Tee up on the first hole at Haystack Mountain.');
 
 /*
 --
