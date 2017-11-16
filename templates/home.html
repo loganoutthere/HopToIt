@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div class="header">
+    <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
+    <img class="slogan" src='/static/images/beer_quote.png' width="500" height=auto vertical-align: "middle">
+    <form>
+      <input type="text" name="search" placeholder="Search..">
+    </form>
+
+  </div>
+    <div class="btn-group">
+    <form action="/breweries/">
+      <button name="brewery" class="button">Breweries</button>
+    </form>
+    <button class="button">Beer</button>
+    <button class="button">Bars</button>
+  </div>
+<script>
+</script>
+
+<style>
+  .logo {
+    display: block;
+    margin: 0 top|left;
+  }
+
+  .slogan {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  input[type=text] {
+    width: 100px;
+    box-sizing: border-box;
+    border: 2px solid #564E4D;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
+    margin-left: 15px;
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    width: 300px;
+    border: 3px solid #564E4D;
+  }
+
+  .button {
+      background-color: white;
+      color: #564E4D;
+      border: 2px solid #564E4D;
+      font-size: 24px;
+      display: block;
+      margin: 15px auto;
+    }
+
+  .button:hover {
+    background-color: #564E4D;
+    color: white;
+    }
+</style>
+
+</body>
+</html>

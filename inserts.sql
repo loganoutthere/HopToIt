@@ -29,10 +29,18 @@ INSERT INTO REGION(region_id, region_name, region_states) VALUES (002, 'Eastern 
 */
 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
-(0001, 'Wasatch_Brewery', '1986-01-01', '801-783-1127', 'www.wasatchbeers.com', 'Salt_Lake_City', 'United_States', 'Utah', '84111', 01, 'This Brewery was founded in 1986 to satisfy the most discerning beer enthusiasts. “Where''s the beer? Where are the breweries?” Those were among the first thoughts Greg Schirf had after moving to Utah from Milwaukee in the early 80''s. Incredibly, drinking and brewing were all but forbidden. Greg took matters into his own hands and did what any self-respecting midwesterner would do: He started a brewery. Wasatch was the very first brewery in Utah – and one of the first craft brewers in all of the U.S. – brewing award-winning brews since 1986.');
+(0001, 'Wasatch_Brewery', '1986-01-01', '801-783-1127', 'www.wasatchbeers.com', 'Salt_Lake_City', 'United_States', 'Utah', '84111', 01, 'This Brewery was founded in 1986 to satisfy the most discerning beer enthusiasts. "Where''s the beer? Where are the breweries?" Those were among the first thoughts Greg Schirf had after moving to Utah from Milwaukee in the early 80s. Incredibly, drinking and brewing were all but forbidden. Greg took matters into his own hands and did what any self respecting midwesterner would do: He started a brewery. Wasatch was the very first brewery in Utah, and one of the first craft brewers in all of the U.S., brewing award winning brews since 1986.');
 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
 (0002, 'Epic_Brewery', '2008-01-01', '801-906-0123', 'www.epicbrewing.com', 'Salt_Lake_City', 'United_States', 'Utah', '84111', 01, 'David Cole and Peter Erickson are the founders and co-owners of Epic Brewing Company. Cole and Erickson, originally from California, started an international aquaculture company in Utah in 1992. In 2008, Utah law changed allowing these two entrepreneurs to pursue their longtime dream of opening a strong beer microbrewery in Utah, like those they frequented in the Golden State.');
+
+
+
+INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
+(3, ‘Left Hand Brewing’,'1980-02-23', '(303) 772-0258', ‘http://lefthandbrewing.com/’, ‘United States’, ‘Colorado’,  80501, 01, 'Living here in our great state requires great balance — there’s just simply too much to do! Soak in over 300 days of sunshine a year. Catch a show at Red Rocks. Climb to the top of 14,255′ Longs Peak. Catch an Avs or Rockies game. Drop into some fresh powder at A-Basin. Tee up on the first hole at Haystack Mountain.');
+
+
+
 /*
 --
 -- Dumping data for table 'BEER'
@@ -44,6 +52,17 @@ INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_refe
 
 INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id VALUES
 (002, 'Devastator', '8%', '60', '69', '002', 02, '02', 0001);
+
+INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, time_of_year_availability, style_code, price, price_range_code, brewery_name VALUES (001, 'Milk_Stout', '5.6%',
+   'Year_Round', 'stout', '$3.99', '<$5', 'Left_Hand_Brewery');
+
+
+
+INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, time_of_year_availability, style_code, price, price_range_code, brewery_name VALUES (001, 'Polygamy_Porter',
+   '7.6%', 'Year_Round', 'porter', '$3.99', '<$5', 'Wasatch_Brewery');
+
+
+
 /*
 --
 -- Dumping data for table 'PRICE_RANGE'
@@ -88,6 +107,9 @@ INSERT INTO BEER_STYLE(style_id, style_name) VALUES (001, 'pale_ale');
 
 INSERT INTO BEER_STYLE(style_id, style_name) VALUES (002, 'amber_lager');
 
+INSERT INTO BEER_STYLE(style_id, style_name) VALUES (00003, 'Porter');
+
+INSERT INTO BEER_STYLE(style_id, style_name) VALUES (00004, 'Stout');
 /*
 --
 -- Dumping data for table 'BAR'
@@ -167,5 +189,3 @@ INSERT INTO BEER_FOR_SEASON(beer_id, time_of_year_availability_id) VALUES (002, 
 */
 
 INSERT INTO LIKES(username, beer_id) VALUES ('thomasE', 01);
-
-INSERT INTO LIKES(username, beer_id) VALUES ('bridgerf', 01);
