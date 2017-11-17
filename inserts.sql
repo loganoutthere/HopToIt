@@ -37,7 +37,7 @@ INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, 
 
 
 INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES
-(3, ‘Left Hand Brewing’,'1980-02-23', '(303) 772-0258', ‘http://lefthandbrewing.com/’, ‘United States’, ‘Colorado’,  80501, 01, 'Living here in our great state requires great balance — there’s just simply too much to do! Soak in over 300 days of sunshine a year. Catch a show at Red Rocks. Climb to the top of 14,255′ Longs Peak. Catch an Avs or Rockies game. Drop into some fresh powder at A-Basin. Tee up on the first hole at Haystack Mountain.');
+(0003, ‘Left Hand Brewing’,'1980-02-23', '(303) 772-0258', ‘http://lefthandbrewing.com/’, ‘United States’, ‘Colorado’,  80501, 01, 'Living here in our great state requires great balance — there’s just simply too much to do! Soak in over 300 days of sunshine a year. Catch a show at Red Rocks. Climb to the top of 14,255′ Longs Peak. Catch an Avs or Rockies game. Drop into some fresh powder at A-Basin. Tee up on the first hole at Haystack Mountain.');
 
 
 
@@ -53,13 +53,11 @@ INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_refe
 INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id VALUES
 (002, 'Devastator', '8%', '60', '69', '002', 02, '02', 0001);
 
-INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, time_of_year_availability, style_code, price, price_range_code, brewery_name VALUES (001, 'Milk_Stout', '5.6%',
-   'Year_Round', 'stout', '$3.99', '<$5', 'Left_Hand_Brewery');
+INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id VALUES (001, 'Milk_Stout', '5.6%', '60', '69',
+   (003, 'Milk_Stout', '8%', '60', '69', '002', 02, '02', '0003');
 
-
-
-INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, time_of_year_availability, style_code, price, price_range_code, brewery_name VALUES (001, 'Polygamy_Porter',
-   '7.6%', 'Year_Round', 'porter', '$3.99', '<$5', 'Wasatch_Brewery');
+INSERT INTO BEER (beer_ID, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id VALUES (001, 'Polygamy_Porter',
+   (004, 'Polygamy_Porter', '8.8%', '60', '69', '002', 02, '02', 0001);
 
 
 
