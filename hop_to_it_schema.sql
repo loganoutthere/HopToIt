@@ -62,20 +62,27 @@ CREATE TABLE BEER
 	standard_reference_method VARCHAR(30) NOT NULL,
 	style_id CHAR(9) NOT NULL,
 	time_of_year_availability_id CHAR(30),
-	price_range_code VARCHAR(9),
+	price_range_code INT(9) NOT NULL,
 	brewery_id INT(30) NOT NULL,
 	PRIMARY KEY(beer_id)
+);
+
+CREATE TABLE PRICE_RANGE
+(
+	price_range_code INT(9) NOT NULL,
+	price_range VARCHAR (9) NOT NULL,
+	PRIMARY KEY (price_range_code)
 );
 
 CREATE TABLE BAR
 (
 	bar_id INT(9) NOT NULL,
-	bar_name VARCHAR(15) NOT NULL,
+	bar_name VARCHAR(30) NOT NULL,
 	city VARCHAR(30),
 	state VARCHAR(30),
 	country VARCHAR(30),
 	zipcode CHAR(9),
-	website_url VARCHAR(30),
+	website_url VARCHAR(100),
 	phone_number VARCHAR(15),
 	PRIMARY KEY(bar_id)
 );
@@ -83,7 +90,7 @@ CREATE TABLE BAR
 CREATE TABLE BEER_STYLE
 (
 	style_id CHAR(9) NOT NULL,
-	style_name VARCHAR(15) NOT NULL,
+	style_name VARCHAR(30) NOT NULL,
 	PRIMARY KEY(style_id)
 );
 
@@ -117,13 +124,6 @@ CREATE TABLE PERSON
 	name VARCHAR(30) NOT NULL,
 	phone_number VARCHAR(15),
 	PRIMARY KEY (username)
-);
-
-CREATE TABLE PRICE_RANGE
-(
-	price_range_code VARCHAR(9) NOT NULL,
-	price_range VARCHAR (9) NOT NULL,
-	PRIMARY KEY (price_range_code)
 );
 
 CREATE TABLE LIKES

@@ -1,8 +1,265 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 </head>
  <body>
-   <p class="info">{{ data }}</p>
+   <div class="header" style="margin: 0 auto;">
+     <!-- <img class="slogan" src='/static/images/beer_quote.png' width="500" height=auto vertical-align: "middle"> -->
+     <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
+     <form>
+       <input type="text" name="search" placeholder="Search..">
+     </form>
+   </div>
+   <div class="topnav">
+     <a href="/home/">Home</a>
+     <a href="/breweries/">Breweries</a>
+     <a href="/beers/">Beers</a>
+     <a href="/bars/">Bars</a>
+     <a href="/mission/">Mission</a>
+     <a href="/about/">About</a>
+   </div>
+   <div class="brewery_information">
+     {% for d in data %}
+        <!-- <img class="brewery_photo" src="/static/images/brewery_logo_test.png" alt="Brewery Logo" align="center"> -->
+        <iframe src="http://{{d.website}}"></iframe>
+        <h1 align="center">{{ d.name }}</h1>
+        <h2 align="center">Established: {{ d.date_established }}</h2>
+        <a href=http://{{d.website}}>{{ d.website }}</a>
+        <!-- <h2 align="center">History</h2> -->
+        <!-- <h3 align="center">{{ d.history_description }}</h3> -->
+        <div class="tab">
+          <form action="/brewery_info/{{d.name}}/beers" method="get">
+              <button id="beers_list" class="beers_button" onclick="show()">Beers</button>
+          </form>
+          <button id="about_info" class="about_button" onclick="show_about(about_info)">About</button>
+          <form action="/brewery_info/{{d.name}}/location" method="get">
+              <button class="location_button" onclick="show()">Location</button>
+          </form>
+          <form action="/brewery_info/{{d.name}}/contact" method="get">
+              <button class="contact_button" onclick="show()">Contact</button>
+          </form>
+        </div>
+     {% endfor %}
+   </div>
+
+   <!-- <ul>
+     {% for d in data %}
+    <li>{{ d }}</li>
+    {% endfor %}
+  </ul> -->
+
  </body>
+ <script>
+   function show(element) {
+     var id = element;
+     document.getElementById(id).style.display = "block";
+  }
+ </script>
+<style>
+
+  div.header {
+    align-items: center;
+  }
+
+  .logo {
+    display: block;
+    position: static;
+    padding-bottom: 15px;
+    margin: 0 auto;
+  }
+
+  .slogan {
+    display: block;
+    margin: 0 auto;
+    position: static;
+    margin: 0 right|center;
+  }
+
+  input[type=text] {
+    width: 100px;
+    box-sizing: border-box;
+    border: 2px solid #564E4D;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
+    margin-left: 15px;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    width: 300px;
+    border: 3px solid #564E4D;
+  }
+
+  .button {
+      background-color: white;
+      color: #564E4D;
+      border: 2px solid #564E4D;
+      font-size: 24px;
+      display: block;
+      margin: 15px auto;
+    }
+
+  .button:hover {
+    background-color: #564E4D;
+    color: white;
+  }
+
+  .topnav {
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    margin:0 auto;
+    padding: 10px 0;
+    width:100%;
+  }
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #564E4D;
+  font-size: 24px;
+  text-align: center;
+  padding: 5px;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  width:15%;
+}
+
+.topnav a:hover {
+  border-bottom: 3px solid #564E4D;
+}
+
+.topnav a.active {
+  border-bottom: 3px solid #564E4D;
+}
+
+  img.brewery_photo {
+      border-radius: 50%;
+      width: 300px;
+      height: auto;
+      margin-top: 25px;
+      position: relative;
+      border: 10px solid #564E4D;
+  }
+
+  iframe  {
+      width: 700px;
+      height: 300px;
+      margin-top: 25px;
+      position: relative;
+      border: 10px solid #564E4D;
+  }
+
+  h1 {
+    font-size: 500%;
+    position: relative;
+    background-color: #564E4D;
+    color: white;
+  }
+
+  h2 {
+    color: #564E4D;
+  }
+
+  h3 {
+    margin-left: 75px;
+    margin-right: 75px;
+    color: #564E4D;
+  }
+  .brewery_information {
+    align: middle;
+    position: relative;
+    text-align:center;
+    background-color: white;
+  }
+
+  a{
+    font-size: 28px;
+    color: #564E4D;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  img.brewery_photo {
+      width: 50px;
+      border-radius:10%;
+      height: auto;
+      margin: 0 auto;
+      align: left;
+      position: relative;
+  }
+
+  .beer_list {
+    position: relative;
+    color: #564E4D;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*margin-left: -175px;*/
+    margin-top: 75px;
+  }
+
+  .brewery_header {
+    font-size: 300%;
+    color: #564E4D;
+    position: relative;
+    margin: auto 0px;
+  }
+
+  hr {
+    border: 1px solid #564E4D;
+  }
+
+  .dropdown {
+  position: relative;
+  display: inline-block;
+  }
+
+  .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+      display: block;
+  }
+
+  .dropdown {
+  position: relative;
+  display: inline-block;
+  }
+
+  .dropdown-content a {
+      color: #564E4D;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #564E4D;
+    color: white;
+  }
+
+  .dropdown:hover .dropdown-content {
+      display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+  }
+
+  .beers_button {
+    background-color: #564E4D;
+    color: white;
+    padding: 16px;
+    font-size: 24px;
+    margin-top: 15px;
+  }
+</style>
 </html>
