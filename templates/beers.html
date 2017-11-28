@@ -24,12 +24,16 @@
       {% for b in beers %}
          <h1>
            <div class="dropdown">
-              <img class="brewery_photo" src="/static/images/brewery_logo_test.png" alt="Brewery Logo" align="center">
-             {{ b.name }}
+              <img class="brewery_photo" src="/static/images/beer_logo.png" alt="Brewery Logo" align="center">
+             {{ b.beer_name }}
               <div class="dropdown-content">
                 <div class="dropdown-content">
-                  <a href="#">Beer Information 1</a>
-                  <a href="#">Beer Information 2</a>
+                  <a href="#">ABV: {{b.alcohol_by_volume}}%</a>
+                  <a href="#">Style: {{b.style_name}}</a>
+                  <a href="#">IBU: {{b.ibu_rank}}</a>
+                  <a href="#">SRM: {{b.standard_reference_method}}</a>
+                  <a href="#">Price Range: {{b.price_range}}</a>
+                  <!-- <a href="#">Availability: {{b.time_of_year_availability_id}}</a> -->
               </div>
               </div>
           </div>

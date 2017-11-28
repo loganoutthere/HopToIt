@@ -5,7 +5,6 @@
 </head>
  <body>
    <div class="header" style="margin: 0 auto;">
-     <!-- <img class="slogan" src='/static/images/beer_quote.png' width="500" height=auto vertical-align: "middle"> -->
      <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
      <form>
        <input type="text" name="search" placeholder="Search..">
@@ -19,20 +18,22 @@
      <a href="/mission/">Mission</a>
      <a href="/about/">About</a>
    </div>
-   <div class="brewery_list">
-     <h1 class="breweries_header">BREWERIES</h1>
+   <div class="beers_list">
+     <h1 class="beers_header">{{brewery}} Beers</h1>
      <hr>
-      {% for d in data %}
+      {% for b in beers %}
          <h1>
            <div class="dropdown">
-              <img class="brewery_photo" src="/static/images/brewery_logo.png" alt="Brewery Logo" align="center">
-              <!-- <iframe src="http://{{d.website}}"></iframe> -->
-             {{ d.name }}
+              <img class="brewery_photo" src="/static/images/beer_logo.png" alt="Brewery Logo" align="center">
+             {{ b.beer_name }}
               <div class="dropdown-content">
                 <div class="dropdown-content">
-                  <a href="/beers/{{d.name}}/">Beers</a>
-                  <a href="/brewery_info/{{d.name}}">Information</a>
-                  <a href=http://{{d.website}}>Website</a>
+                  <a href="#">ABV: {{b.alcohol_by_volume}}%</a>
+                  <a href="#">Style: {{b.style_name}}</a>
+                  <a href="#">IBU: {{b.ibu_rank}}</a>
+                  <a href="#">SRM: {{b.standard_reference_method}}</a>
+                  <a href="#">Price Range: {{b.price_range}}</a>
+                  <!-- <a href="#">Availability: {{b.time_of_year_availability_id}}</a> -->
               </div>
               </div>
           </div>
@@ -41,21 +42,14 @@
       {% endfor %}
   </div>
 
-   <!-- <ul>
-     {% for d in data %}
+   <ul>
+     {% for d in beers %}
     <li>{{ d }}</li>
     {% endfor %}
-  </ul> -->
+  </ul>
 
  </body>
  <script>
- // function strip(brewery_name) {
- //   var stripped_string = brewery_name.replace(" ", "_");
- //   return stripped_string
- // }
- //
- //
- // })();
  </script>
 <style>
 
@@ -136,7 +130,7 @@
       border-bottom: 3px solid #564E4D;
     }
 
-    .brewery_list {
+    .beers_list {
       position: relative;
       color: #564E4D;
       /*top: 50%;*/
@@ -152,7 +146,7 @@
         align: left;
         position: relative;
     }
-    .breweries_header {
+    .beers_header {
       font-size: 300%;
       color: #564E4D;
       position: relative;
