@@ -33,18 +33,25 @@
     //no sql incetion
     $query = mysql_real_escape_string($query);
 
-//    $question = "(SELECT *, 'msg'as type FROM beer WHERE content LIKE '%" .
-//    $keyword . "%' OR title LIKE '%" . $keyword . "%')
-//    UNION
-//    ()
-//    UNION
-//    ()";
+    $question = "(SELECT beer_name, ibu_rank, standard_reference_method, alcohol_by_volume, 'beer' as type FROM beer WHERE
+    beer_name LIKE '%" . $keyword . "%' OR ibu_rank LIKE '%" . $keyword . "%' OR standard_reference_method LIKE '%" . $keyword . "%'
+    OR alcohol_by_volume LIKE '%" . $keyword . "%' )
+    UNION
+    (SELECT name, date_established, website, city, country, state, 'brewery' as type FROM brewery WHERE
+    name LIKE '%" . $keyword . "%' OR website LIKE '%" . $keyword . "%' OR city LIKE '%" . $keyword . "%'
+    OR country LIKE '%" . $keyword . "%' OR state LIKE '%" . $keyword . "%')
+    UNION
+    (SELECT bar_name, website_url, city, country, state, 'bar' as type FROM bar WHERE
+    bar_name LIKE '%" . $keyword . "%' OR website_url LIKE '%" . $keyword . "%' OR city LIKE '%" . $keyword . "%'
+    OR country LIKE '%" . $keyword . "%' OR state LIKE '%" . $keyword . "%')";
 
-    $raw_results = mysql_query("SELECT * FROM beer
-      WHERE ('beer_name' LIKE '%".$query."%')
-      OR ('ibu_rank' LIKE '%".$query."%')
-      OR ('standard_reference_method' LIKE '%".$query."%')
-      OR ('style_id' LIKE '%".$query."%')") or die(mysql_error());
+//    $raw_results = mysql_query("SELECT * FROM beer
+//      WHERE ('beer_name' LIKE '%".$query."%')
+//      OR ('ibu_rank' LIKE '%".$query."%')
+//      OR ('standard_reference_method' LIKE '%".$query."%')
+//      OR ('style_id' LIKE '%".$query."%')") or die(mysql_error());
+
+    $raw_results = mysql_query($question) or die(mysql_error());
 
     if(mysql_num_rows($raw_results) > 0){
       while($results = mysql_fetch_array($raw_results)){
