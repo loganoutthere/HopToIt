@@ -14,6 +14,21 @@ app = Flask(__name__)
 def hello():
 	return render_template('home.html')
 
+@app.route('/search/')
+def search():
+	db_cursor = db.cursor()
+	# data = db_cursor.fetchone()
+	query = request.args('search')
+	db_cursor.execute(query)
+	headers=[header[0] for header in db_cursor.description] #return headers with values
+	data = db_cursor.fetchall()
+	json_data=[]
+	for attribute in data:
+		json_data.append(dict(zip(headers,attribute)))
+	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
+	return render_template('search.html', search=search, data=(json_data))
+	# return  jsonify(data)
+
 @app.route('/breweries/')
 def breweries():
 	db_cursor = db.cursor()
@@ -32,15 +47,35 @@ def breweries():
 def beers():
 	db_cursor = db.cursor()
 	# data = db_cursor.fetchone()
-	db_cursor.execute("Select * from Beer")
+	query = """SELECT b.beer_name, b.alcohol_by_volume, b.ibu_rank, b.standard_reference_method, bs.style_name, b.time_of_year_availability_id, pr.price_range, br.name
+				FROM beer b INNER JOIN BEER_STYLE bs ON (b.style_id = bs.style_id)
+				INNER JOIN PRICE_RANGE pr ON (b.price_range_code = pr.price_range_code)
+				INNER JOIN BREWERY br ON (b.brewery_id = br.brewery_id);"""
+	db_cursor.execute(query)
 	headers=[header[0] for header in db_cursor.description] #return headers with values
 	data = db_cursor.fetchall()
 	json_data=[]
 	for attribute in data:
 		json_data.append(dict(zip(headers,attribute)))
 	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
-	return render_template('beers.html', data=(json_data))
+	return render_template('beers.html', beers=(json_data))
 	# return  jsonify(data)
+
+@app.route('/bars/')
+def bars():
+	db_cursor = db.cursor()
+	# data = db_cursor.fetchone()
+	query = """SELECT * FROM BAR;"""
+	db_cursor.execute(query)
+	headers=[header[0] for header in db_cursor.description] #return headers with values
+	data = db_cursor.fetchall()
+	json_data=[]
+	for attribute in data:
+		json_data.append(dict(zip(headers,attribute)))
+	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
+	return render_template('bars.html', bars=(json_data))
+	# return  jsonify(data)
+
 
 @app.route('/brewery_info/<brewery>')
 def brewery_info(brewery):
@@ -55,19 +90,23 @@ def brewery_info(brewery):
 	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
 	return render_template('brewery_info.html', brewery=brewery, data=(json_data))
 
-@app.route('/brewery_info/<brewery>/beers')
+@app.route('/beers/<brewery>/')
 def brewery_beers(brewery):
+	# brewery_name = brewery.replace('_', "")
 	db_cursor = db.cursor()
-	beer_id = "Select brewery_id from brewery where name = '{}';".format(brewery)
-	query = "Select * from beer where brewery_id = '{}';".format(beer_id)
+	query = """SELECT b.beer_name, b.alcohol_by_volume, b.ibu_rank, b.standard_reference_method, bs.style_name,
+			b.time_of_year_availability_id, pr.price_range, br.name
+			FROM beer b INNER JOIN BEER_STYLE bs ON (b.style_id = bs.style_id)
+			INNER JOIN PRICE_RANGE pr ON (b.price_range_code = pr.price_range_code)
+			INNER JOIN BREWERY br ON (b.brewery_id = br.brewery_id)
+			WHERE (br.name ='{{brewery}}');""".format(brewery)
 	db_cursor.execute(query)
 	headers=[header[0] for header in db_cursor.description] #return headers with values
 	data = db_cursor.fetchall()
 	json_data=[]
 	for attribute in data:
 		json_data.append(dict(zip(headers,attribute)))
-	# json_data = "{u'brewery_id': 1, u'beer_id': 01, u'beer_name': 'Spiral Jetty IPA', u'brewery_id': 01}"
-	return render_template('beers.html', brewery=brewery, beers=(json_data))
+	return render_template('brewery_beers.html', brewery=brewery, beers=(json_data))
 
 def date_handler(attribute):
     # if hasattr(attribute, 'isoformat'):
