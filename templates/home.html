@@ -7,8 +7,11 @@
 <body>
   <div class="header" style="margin: 0 auto;">
     <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
-    <form action="{{ url_for('search') }}">
-      <input type="text" name="search" placeholder="Search.." value="{{request.form.search}}">
+    <!-- <form action="/search/" method="POST">
+      <input type="text" name="search" placeholder="Search.." value="{{request.data.search}}">
+    </form> -->
+    <form method="POST" action="/search/">
+      <input name="text" placeholder="Search..">
     </form>
   </div>
   <div>
@@ -44,7 +47,7 @@
     top: 100px;
   }
 
-  input[type=text] {
+  input[name='text'] {
     width: 100px;
     box-sizing: border-box;
     border: 2px solid #564E4D;

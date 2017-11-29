@@ -6,8 +6,8 @@
  <body>
    <div class="header" style="margin: 0 auto;">
      <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
-     <form>
-       <input type="text" name="search" placeholder="Search..">
+     <form method="POST" action="/search/">
+       <input name="text" placeholder="Search..">
      </form>
    </div>
    <div class="topnav">
@@ -19,20 +19,20 @@
      <a href="/about/">About</a>
    </div>
    <div class="search_list">
-     <h1 class="search_header">Search: {{search}}</h1>
+     <h1 class="search_header">Search: {{search_term}}</h1>
      <hr>
-      {% for b in search %}
+      {% for b in search_results %}
          <h1>
            <div class="dropdown">
-              <img class="search_photo" src="/static/images/brewery_logo_test.png" alt="Search Logo" align="center">
-             {{ b }}
+              <img class="search_photo" src="/static/images/beer_logo.png" alt="Brewery Logo" align="center">
+             {{ b.beer_name }} {{ b.name }} {{ b.bar_name }} {{ b.style_name }} {{b.region_name}} {{b.food_type}}
               <div class="dropdown-content">
                 <div class="dropdown-content">
-                  <a href="#">ABV: {{b.alcohol_by_volume}}%</a>
-                  <a href="#">Style: {{b.style_name}}</a>
+                  <!-- <a href="#">ABV: {{b.alcohol_by_volume}}%</a> -->
+                  <!-- <a href="#">Style: {{b.style_name}}</a>
                   <a href="#">IBU: {{b.ibu_rank}}</a>
                   <a href="#">SRM: {{b.standard_reference_method}}</a>
-                  <a href="#">Price Range: {{b.price_range}}</a>
+                  <a href="#">Price Range: {{b.price_range}}</a> -->
                   <!-- <a href="#">Availability: {{b.time_of_year_availability_id}}</a> -->
               </div>
               </div>
@@ -71,7 +71,7 @@
     margin: 0 right|center;
   }
 
-  input[type=text] {
+  input[name='text'] {
     width: 100px;
     box-sizing: border-box;
     border: 2px solid #564E4D;
@@ -138,7 +138,7 @@
       /*margin-left: -175px;*/
       margin-top: 75px;
     }
-    img.brewery_photo {
+    img.search_photo {
         width: 50px;
         border-radius:10%;
         height: auto;

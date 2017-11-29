@@ -6,8 +6,8 @@
  <body>
    <div class="header" style="margin: 0 auto;">
      <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
-     <form>
-       <input type="text" name="search" placeholder="Search..">
+     <form method="POST" action="/search/">
+       <input name="text" placeholder="Search..">
      </form>
    </div>
    <div class="topnav">
@@ -71,7 +71,7 @@
     margin: 0 right|center;
   }
 
-  input[type=text] {
+  input[name='text'] {
     width: 100px;
     box-sizing: border-box;
     border: 2px solid #564E4D;

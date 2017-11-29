@@ -14,20 +14,41 @@ app = Flask(__name__)
 def hello():
 	return render_template('home.html')
 
-@app.route('/search/')
-def search():
+@app.route('/login/')
+def login():
+	return render_template('index.html')
+
+# @app.route('/search/')
+# def search():
+# 	db_cursor = db.cursor()
+# 	search_term = request.form['text']
+# 	# data = db_cursor.fetchone()
+# 	query = request.args("Select * from {}".format(search_term))
+# 	db_cursor.execute(query)
+# 	headers=[header[0] for header in db_cursor.description] #return headers with values
+# 	data = db_cursor.fetchall()
+# 	json_data=[]
+# 	for attribute in data:
+# 		json_data.append(dict(zip(headers,attribute)))
+# 	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
+# 	return render_template('search.html', search_term=search_term, search=(json_data))
+# @app.route('/search/')
+# def search():
+#     return render_template('search.html')
+
+@app.route('/search/', methods=['POST'])
+def search_post():
+	text = request.form['text']
+	search_term = text.upper()
 	db_cursor = db.cursor()
-	# data = db_cursor.fetchone()
-	query = request.args('search')
+	query = ("Select * from {}".format(search_term))
 	db_cursor.execute(query)
 	headers=[header[0] for header in db_cursor.description] #return headers with values
 	data = db_cursor.fetchall()
 	json_data=[]
 	for attribute in data:
 		json_data.append(dict(zip(headers,attribute)))
-	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
-	return render_template('search.html', search=search, data=(json_data))
-	# return  jsonify(data)
+	return render_template('search.html', search_term=search_term, search_results=(json_data))
 
 @app.route('/breweries/')
 def breweries():
@@ -99,7 +120,7 @@ def brewery_beers(brewery):
 			FROM beer b INNER JOIN BEER_STYLE bs ON (b.style_id = bs.style_id)
 			INNER JOIN PRICE_RANGE pr ON (b.price_range_code = pr.price_range_code)
 			INNER JOIN BREWERY br ON (b.brewery_id = br.brewery_id)
-			WHERE (br.name ='{{brewery}}');""".format(brewery)
+			WHERE (br.name = "{}");""".format(brewery)
 	db_cursor.execute(query)
 	headers=[header[0] for header in db_cursor.description] #return headers with values
 	data = db_cursor.fetchall()

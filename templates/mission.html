@@ -7,8 +7,8 @@
 <body>
   <div class="header" style="margin: 0 auto;">
     <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
-    <form action="{{ url_for('search') }}">
-      <input type="text" name="search" placeholder="Search.." value="{{request.form.search}}">
+    <form method="POST" action="/search/">
+      <input name="text" placeholder="Search..">
     </form>
   </div>
   <div>
@@ -23,6 +23,7 @@
     <a href="/about/">About</a>
   </div>
   <div>
+    <h1 align='center'>Our Mission</h1>
     <h1 align='center'>The mission here at Hop To It is to bring the wonderful <br/> work of beer to as many beer lovers as possible. <br/>
       Our love for beer inspired us to create this amazing tool <br/> and now we set out to share it with the world.</h1>
   </div>
@@ -48,7 +49,7 @@
     top: 100px;
   }
 
-  input[type=text] {
+  input[name='text'] {
     width: 100px;
     box-sizing: border-box;
     border: 2px solid #564E4D;
