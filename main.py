@@ -16,7 +16,11 @@ def hello():
 
 @app.route('/login/')
 def login():
-	return render_template('index.html')
+	return render_template('user_systems/login.php')
+
+@app.route('/register/')
+def register():
+	return render_template('user_systems/registrer.php')
 
 # @app.route('/search/')
 # def search():
