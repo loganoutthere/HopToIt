@@ -45,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   //Validate password
-  if(empty(trim($_POST['passwords']))){
+  if(empty(trim($_POST['password']))){
     $password_err = "Please enter a password.";
   }
   elseif(strlen(trim($_POST['password'])) < 6){
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   //Validate confirm password
   if(empty(trim($_POST["confirm_password"]))){
-    $confirm_password_err = 'Please confimr password.';
+    $confirm_password_err = 'Please confirm password.';
   }
   else {
     $confirm_password = trim($_POST['confirm_password']);
