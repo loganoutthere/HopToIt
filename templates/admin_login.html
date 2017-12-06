@@ -6,16 +6,13 @@
 </head>
 <body>
   <div class="header" style="margin: 0 auto;">
-    <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
+    <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
     <!-- <form action="/search/" method="POST">
       <input type="text" name="search" placeholder="Search.." value="{{request.data.search}}">
     </form> -->
     <form method="POST" action="/search/">
       <input name="text" placeholder="Search..">
     </form>
-    <a href="/admin/insert/">
-        <img class="admin_button" src='/static/images/hops.png'>
-    </a>
   </div>
   <div>
     <h1 align='center'>Beer is living proof that God loves us and wants us to be happy!</h1>
@@ -28,6 +25,15 @@
     <a href="/mission/">Mission</a>
     <a href="/about/">About</a>
   </div>
+  <form action="/admin/login/">
+    Enter your Username:
+    <input name="username" type="text">
+    Enter your Password:
+    <input name="password" type="password">
+    <br><br>
+    <input type="submit">
+  </form>
+
 <script>
 </script>
 
@@ -66,13 +72,18 @@
     border: 3px solid #564E4D;
   }
 
-  .admin_button {
+  input[type='text'] {
+    width: 100px;
+    box-sizing: border-box;
+    border: 2px solid #564E4D;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
     margin-left: 15px;
     position: absolute;
-    top: 50px;
-    left: 10px;
-    width: 100px;
-    height: auto;
+    margin: auto;
+    border: 3px solid #564E4D;
   }
 
   .button {

@@ -6,16 +6,13 @@
 </head>
 <body>
   <div class="header" style="margin: 0 auto;">
-    <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
+    <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
     <!-- <form action="/search/" method="POST">
       <input type="text" name="search" placeholder="Search.." value="{{request.data.search}}">
     </form> -->
     <form method="POST" action="/search/">
       <input name="text" placeholder="Search..">
     </form>
-    <a href="/admin/insert/">
-        <img class="admin_button" src='/static/images/hops.png'>
-    </a>
   </div>
   <div>
     <h1 align='center'>Beer is living proof that God loves us and wants us to be happy!</h1>
@@ -28,6 +25,14 @@
     <a href="/mission/">Mission</a>
     <a href="/about/">About</a>
   </div>
+  <h1>ADMIN MENU</h1>
+
+  <ul>
+    {% for d in data %}
+   <li>{{ d }}</li>
+   {% endfor %}
+ </ul>
+ 
 <script>
 </script>
 
@@ -64,15 +69,6 @@
     right: 10px;
     width: 300px;
     border: 3px solid #564E4D;
-  }
-
-  .admin_button {
-    margin-left: 15px;
-    position: absolute;
-    top: 50px;
-    left: 10px;
-    width: 100px;
-    height: auto;
   }
 
   .button {
