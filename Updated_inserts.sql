@@ -340,7 +340,7 @@ INSERT INTO BEER_FOR_SEASON(beer_id, time_of_year_availability_id) VALUES (2, 2)
 INSERT INTO LIKES(username, beer_id) VALUES ('thomasE', 1);
 
 
-INSERT INTO users(id, username, password, email) VALUES (1, 'tme0221', 'tmepassword', 'tme0221@westminstercollege.edu');
-INSERT INTO users(id, username, password, email) VALUES (2, 'cbm0908', 'cbmpassword', 'cbm0908@westminstercollege.edu');
-INSERT INTO users(id, username, password, email) VALUES (3, 'bef0926', 'befpassword', 'bef0926@westminstercollege.edu');
-INSERT INTO users(id, username, password, email) VALUES (4, 'lag0917', 'lagpassword', 'lag0917@westminstercollege.edu');
+INSERT INTO users(id, username, pass, email) VALUES (1, 'tme0221', 'tmepass', 'tme0221@westminstercollege.edu');
+INSERT INTO users(id, username, pass, email) VALUES (2, 'cbm0908', 'cbmpass', 'cbm0908@westminstercollege.edu');
+INSERT INTO users(id, username, pass, email) VALUES (3, 'bef0926', 'befpass', 'bef0926@westminstercollege.edu');
+INSERT INTO users(id, username, pass, email) VALUES (4, 'lag0917', 'lagpass', 'lag0917@westminstercollege.edu');
