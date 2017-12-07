@@ -14,6 +14,14 @@ app = Flask(__name__)
 def hello():
 	return render_template('home.html')
 
+@app.route('/login/')
+def loginSysL():
+	return render_template('user_systems/login.php')
+
+@app.route('/welcome')
+def welcomeBiches():
+	return render_template('user_systems/welcome.php')
+
 @app.route('/advanced_search/')
 def advanced_search():
 	return render_template('advanced_search.html')
