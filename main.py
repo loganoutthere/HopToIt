@@ -3,6 +3,7 @@ from flask import Flask, render_template, Response, request, redirect, url_for, 
 import pymysql
 import json
 import datetime
+import random
 
 #initializing mysql database connection
 db = pymysql.connect("localhost", "hop_owner", "", "hop_to_it")
@@ -65,12 +66,86 @@ def admin_insert():
 
 	return render_template('insert.html', breweries=(brewery_data), styles=(style_data), prices=(price_range_data), availabilities=(availability_data), regions=(regions_data))
 
+@app.route('/admin/remove/')
+def admin_remove():
+	db_cursor = db.cursor()
+	query_list = []
+	breweries = "Select * from Brewery;"
+	query_list.append(breweries)
+	bars = "Select * from Bar;"
+	query_list.append(bars)
+	food_pairing = "Select * from FOOD_PAIRING;"
+	query_list.append(food_pairing)
+	beers = "Select * from Beer;"
+	query_list.append(beers)
+
+	brewery_data = []
+	bar_data = []
+	food_pairing_data = []
+	beer_data = []
+
+	for query in range(0, len(query_list)):
+		db_cursor.execute(query_list[query])
+		headers=[header[0] for header in db_cursor.description] #return headers with values
+		data = db_cursor.fetchall()
+		for attribute in data:
+			if query == 0:
+				brewery_data.append(dict(zip(headers,attribute)))
+			elif query == 1:
+				bar_data.append(dict(zip(headers,attribute)))
+			elif query == 2:
+				food_pairing_data.append(dict(zip(headers,attribute)))
+			else:
+				beer_data.append(dict(zip(headers,attribute)))
+
+	return render_template('remove.html', breweries=(brewery_data), bars=(bar_data), food_pairings=(food_pairing_data), beers=(beer_data))
+
+@app.route('/admin/remove/brewery', methods=['GET', 'POST'])
+def remove_brewery():
+	db_cursor = db.cursor()
+	brewery_id = request.form["brewery_id"]
+	remove_query = "DELETE FROM brewery WHERE brewery_id = %s"
+	db_cursor.execute(remove_query, (brewery_id))
+	db.commit()
+
+	return render_template('remove.html')
+
+@app.route('/admin/remove/beer', methods=['GET', 'POST'])
+def remove_beer():
+	db_cursor = db.cursor()
+	beer_id = request.form["beer_id"]
+	remove_query = "DELETE FROM beer WHERE beer_id = %s"
+	db_cursor.execute(remove_query, (beer_id))
+	db.commit()
+
+	return render_template('remove.html')
+
+@app.route('/admin/remove/beer_food', methods=['GET', 'POST'])
+def remove_beer_food():
+	db_cursor = db.cursor()
+	food_id = request.form["food_id"]
+	remove_query = "DELETE FROM FOOD_PAIRING WHERE food_id = %s"
+	print remove_query, "id: ", food_id
+	db_cursor.execute(remove_query, (food_id))
+	db.commit()
+
+	return render_template('remove.html')
+
+@app.route('/admin/remove/bar', methods=['GET', 'POST'])
+def remove_bar():
+	db_cursor = db.cursor()
+	bar_id = request.form["bar_id"]
+	remove_query = "DELETE FROM bar WHERE bar_id = %s"
+	db_cursor.execute(remove_query, (bar_id))
+	db.commit()
+
+	return render_template('remove.html')
+
 @app.route('/admin/insert/brewery', methods=['GET', 'POST'])
 def insert_brewery():
 	db_cursor = db.cursor()
 	name = request.form["name"]
 	date_established = request.form["date_established"]
-	print "Date", date_established
 	phone_number = request.form["phone_number"]
 	website = request.form["website"]
 	city = request.form["city"]
@@ -81,48 +156,56 @@ def insert_brewery():
 	history_description = request.form["history_description"]
 
 	insert_query = "INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-	db_cursor.execute(insert_query, (17, str(name), str(date_established), str(phone_number), str(website), str(city), str(country), str(state), int(zipcode), int(region_id), str(history_description)))
+	db_cursor.execute(insert_query, (random.randint(21,101), str(name), str(date_established), str(phone_number), str(website), str(city), str(country), str(state), int(zipcode), int(region_id), str(history_description)))
 	db.commit()
-	# get_query = "Select * from Brewery;"
-    #
-	# db_cursor.execute(get_query)
-	# headers=[header[0] for header in db_cursor.description] #return headers with values
-	# data = db_cursor.fetchall()
-	# json_data=[]
-	# for attribute in data:
-	# 	json_data.append(dict(zip(headers,attribute)))
 
 	return render_template('insert.html')
 
 @app.route('/admin/insert/beer', methods=['GET', 'POST'])
 def insert_beer():
 	db_cursor = db.cursor()
-	name = request.form["name"]
-	date_established = request.form["date_established"]
-	print "Date", date_established
-	phone_number = request.form["phone_number"]
-	website = request.form["website"]
+	beer_name = request.form["beer_name"]
+	alcohol_by_volume = request.form["alcohol_by_volume"]
+	ibu_rank = request.form["ibu_rank"]
+	standard_reference_method = request.form["standard_reference_method"]
+	style_id = request.form["style_id"]
+	time_of_year_availability_id = request.form["time_of_year_availability_id"]
+	price_range_code = request.form.get("price_range_code")
+	brewery_id = request.form["brewery_id"]
+
+	insert_query = "INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+	db_cursor.execute(insert_query, (random.randint(21,101), str(beer_name), (alcohol_by_volume), (ibu_rank), (standard_reference_method), int(style_id), int(time_of_year_availability_id), int(price_range_code), int(brewery_id)))
+	db.commit()
+
+	return render_template('insert.html')
+
+@app.route('/admin/insert/beer_food', methods=['GET', 'POST'])
+def insert_beer_food():
+	db_cursor = db.cursor()
+	food_type = request.form["food_type"]
+
+	insert_query = "INSERT INTO FOOD_PAIRING(food_id, food_type) VALUES (%s, %s);"
+	db_cursor.execute(insert_query, (random.randint(21,101), str(food_type)))
+	db.commit()
+
+	return render_template('insert.html')
+
+@app.route('/admin/insert/bar', methods=['GET', 'POST'])
+def insert_bar():
+	db_cursor = db.cursor()
+	bar_name = request.form["bar_name"]
 	city = request.form["city"]
 	state = request.form["state"]
-	country = request.form.get("country")
-	zipcode = int(request.form["zipcode"])
-	region_id = request.form.get("region_id")
-	history_description = request.form["history_description"]
+	country = request.form["country"]
+	zipcode = request.form["zipcode"]
+	website_url = request.form["website_url"]
+	phone_number = request.form.get("phone_number")
 
-	insert_query = "INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-	db_cursor.execute(insert_query, (17, str(name), str(date_established), str(phone_number), str(website), str(city), str(country), str(state), int(zipcode), int(region_id), str(history_description)))
+	insert_query = "INSERT INTO BAR(bar_id, bar_name, city, state, country, zipcode, website_url, phone_number) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+	db_cursor.execute(insert_query, (random.randint(21,101), str(bar_name), str(city), str(state), str(country), int(zipcode), str(website_url), str(phone_number)))
 	db.commit()
-	get_query = "Select * from Brewery;"
 
-	db_cursor.execute(get_query)
-	headers=[header[0] for header in db_cursor.description] #return headers with values
-	data = db_cursor.fetchall()
-	json_data=[]
-	for attribute in data:
-		json_data.append(dict(zip(headers,attribute)))
-
-	return render_template('breweries.html', data=(json_data))
-
+	return render_template('insert.html')
 
 @app.route('/admin/login/')
 def admin_login():

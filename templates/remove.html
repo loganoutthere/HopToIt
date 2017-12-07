@@ -10,7 +10,7 @@
       <button class="add_button hidden">+</button>
     </form>
     <form action="/admin/remove/">
-      <button class="remove_button hidden">-</button>
+      <button class="remove_button_admin hidden">-</button>
     </form>
     <a href="/home/">
       <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
@@ -31,167 +31,79 @@
     <a href="/mission/">Mission</a>
     <a href="/about/">About</a>
   </div>
-  <h1 class="insert_button">Add New Entry</h1>
+  <h1 class="remove_button">Choose to remove</h1>
 
-  <div class="insert_button show">
-    <img src="/static/images/bar_before.png" class="insert_button show" id="bar_before" onclick="insert('bar_insert_form')">
-    <img src="/static/images/beer_before.png" class="insert_button show" id="beer_before" onclick="insert('beer_insert_form')">
-    <img src="/static/images/beer_food_before.png"  class="insert_button show"id="beer_food_before" onclick="insert('beer_food_insert_form')">
-    <img src="/static/images/brewery_before.png" class="insert_button show" id="brewery_before" onclick="insert('brewery_insert_form')">
+  <div class="remove_button show">
+    <img src="/static/images/bar_before.png" class="remove_button show" id="bar_before" onclick="remove('bar_remove_form')">
+    <img src="/static/images/beer_before.png" class="remove_button show" id="beer_before" onclick="remove('beer_remove_form')">
+    <img src="/static/images/beer_food_before.png"  class="remove_button show"id="beer_food_before" onclick="remove('beer_food_remove_form')">
+    <img src="/static/images/brewery_before.png" class="remove_button show" id="brewery_before" onclick="remove('brewery_remove_form')">
   </div>
 
   <div style="padding: 20px;">
-    <form action="/admin/insert/brewery" method=post class="brewery_insert_form hidden">
-      <h2>New Brewery</h2>
-      Name:
-      <input name="name" type="text">
-      <br><br>
-      Date Established:
-      <input name="date_established" type="text" placeholder="yyyy-MM-dd">
-      <!-- <input name="date_established" type="date"> -->
-      <br><br>
-      Phone Number:
-      <input name="phone_number" type="text">
-      <br><br>
-      Website:
-      <input name="website" type="text">
-      <br><br>
-      City:
-      <input name="city" type="text">
-      <br><br>
-      State:
-      <input name="state" type="text">
-      <br><br>
-      Country:
-      <select id="country" name="country">
-        <option value="United States">United States</option>
-      </select>
-      <br><br>
-      Zipcode:
-      <input name="zipcode" type="text">
-      <br><br>
-      Region:
-      <select name="region_id">
-        <option value="" disabled selected hidden></option>
-        {% for r in regions %}
-        <option value="{{r.region_id}}">{{r.region_name}}: {{r.region_states}}</option>
-       {% endfor %}
-      </select>
-      <br><br>
-      History Description:
-      <input name="history_description" type="text">
-      <br><br>
-      <input type="submit">
-    </form>
-  </div>
-
-  <div style="padding: 20px;">
-    <form action="/admin/insert/bar" method=post class="bar_insert_form hidden">
-      <h2>New Bar</h2>
-      Name:
-      <input name="bar_name" type="text">
-      <br><br>
-      Phone Number:
-      <input name="phone_number" type="text">
-      <br><br>
-      Website:
-      <input name="website_url" type="text">
-      <br><br>
-      City:
-      <input name="city" type="text">
-      <br><br>
-      State:
-      <input name="state" type="text">
-      <br><br>
-      Country:
-      <select id="country" name="country">
-        <option value="United States">United States</option>
-      </select>
-      <br><br>
-      Zipcode:
-      <input name="zipcode" type="text">
-      <br><br>
-      <input type="submit">
-    </form>
-  </div>
-
-  <div style="padding: 20px;">
-    <form action="/admin/insert/beer_food" method=post class="beer_food_insert_form hidden">
-      <h2>New Beer Food Pairing</h2>
-      Food Type:
-      <input name="food_type" type="text">
-      <br><br>
-      <input type="submit">
-    </form>
-  </div>
-
-  <div style="padding: 20px;">
-    <form action="/admin/insert/beer" method=post class="beer_insert_form hidden">
-      <h2>New Beer</h2>
-      Name:
-      <input name="beer_name" type="text">
-      <br><br>
-      Alcohol by Volume (%):
-      <input name="alcohol_by_volume" type="text">%
-      <br><br>
-      IBU Rank:
-      <input name="ibu_rank" type="text">
-      <br><br>
-      Standard Reference Method:
-      <input name="standard_reference_method" type="text">
-      <br><br>
-      Style ID:
-      <select name="style_id">
-        <option value="" disabled selected hidden></option>
-        {% for s in styles %}
-        <option value="{{s.style_id}}">{{s.style_name}}</option>
-       {% endfor %}
-      </select>
-      <br><br>
-      Time of Year Availability:
-      <select name="time_of_year_availability_id">
-        <option value="" disabled selected hidden></option>
-        {% for t in availabilities %}
-        <option value="{{t.time_of_year_availability_id}}">{{t.start_date_of_availability}} - {{t.end_date_of_availability}}</option>
-       {% endfor %}
-      </select>
-      <br><br>
-      Price Range:
-      <select name="price_range_code">
-        <option value="" disabled selected hidden></option>
-        {% for p in prices %}
-        <option value="{{p.price_range_code}}">{{p.price_range}}</option>
-       {% endfor %}
-      </select>
-      <br><br>
-      Brewery:
-      <select name="brewery_id">
-        <option value="" disabled selected hidden></option>
+    <h2 class="brewery_remove_form hidden">Choose brewery to remove</h2>
+    <form action="/admin/remove/brewery" method=post class="brewery_remove_form hidden">
         {% for b in breweries %}
-        <option value="{{b.brewery_id}}">{{b.name}}</option>
+        <input type="radio" name="brewery_id" value="{{b.brewery_id}}"> {{b.name}}<br>
        {% endfor %}
       </select>
-      <br><br>
+      <br>
+      <input type="submit">
+    </form>
+  </div>
+
+  <div style="padding: 20px;">
+    <h2 class="bar_remove_form hidden">Choose bar to remove</h2>
+    <form action="/admin/remove/bar" method=post class="bar_remove_form hidden">
+        {% for b in bars %}
+        <input type="radio" name="bar_id" value="{{b.bar_id}}"> {{b.bar_name}}<br>
+       {% endfor %}
+      </select>
+      <br>
+      <input type="submit">
+    </form>
+  </div>
+
+  <div style="padding: 20px;">
+    <h2 class="beer_food_remove_form hidden">Choose food pairing to remove</h2>
+    <form action="/admin/remove/beer_food" method=post class="beer_food_remove_form hidden">
+        {% for b in food_pairings %}
+        <input type="radio" name="food_id" value="{{b.food_id}}"> {{b.food_type}}<br>
+       {% endfor %}
+      </select>
+      <br>
+      <input type="submit">
+    </form>
+  </div>
+
+  <div style="padding: 20px;">
+    <h2 class="beer_remove_form hidden">Choose beer to remove</h2>
+    <form action="/admin/remove/beer" method=post class="beer_remove_form hidden">
+        {% for b in beers %}
+        <input type="radio" name="beer_id" value="{{b.beer_id}}"> {{b.beer_name}}<br>
+       {% endfor %}
+      </select>
+      <br>
       <input type="submit">
     </form>
   </div>
 
 <script>
-function insert(selected_insert) {
-    console.log(selected_insert);
+function remove(selected_remove) {
+    console.log(selected_remove);
 
-    var insert_buttons = document.getElementsByClassName("insert_button");
+    var remove_buttons = document.getElementsByClassName("remove_button");
     var i;
-    for (i = 0; i < insert_buttons.length; i++) {
-      var current_button = insert_buttons[i];
+    for (i = 0; i < remove_buttons.length; i++) {
+      var current_button = remove_buttons[i];
       current_button.classList.remove('show');
       current_button.classList.add('hidden');
     }
 
-    var insert_forms = document.getElementsByClassName(selected_insert);
+    var remove_forms = document.getElementsByClassName(selected_remove);
     var i;
-    for (i = 0; i < insert_forms.length; i++) {
-      var current_form = insert_forms[i];
+    for (i = 0; i < remove_forms.length; i++) {
+      var current_form = remove_forms[i];
       current_form.classList.remove('hidden');
       current_form.classList.add('show');
     }
@@ -204,12 +116,12 @@ function show() {
       document.getElementsByClassName("add_button")[0].classList.add('hidden');
       document.getElementsByClassName("add_button")[0].classList.remove('show');
     }
-    if (document.getElementsByClassName("remove_button")[0].classList.contains('hidden') == true) {
-      document.getElementsByClassName("remove_button")[0].classList.remove('hidden');
-      document.getElementsByClassName("remove_button")[0].classList.add('show');
+    if (document.getElementsByClassName("remove_button_admin")[0].classList.contains('hidden') == true) {
+      document.getElementsByClassName("remove_button_admin")[0].classList.remove('hidden');
+      document.getElementsByClassName("remove_button_admin")[0].classList.add('show');
     } else {
-      document.getElementsByClassName("remove_button")[0].classList.add('hidden');
-      document.getElementsByClassName("remove_button")[0].classList.remove('show');
+      document.getElementsByClassName("remove_button_admin")[0].classList.add('hidden');
+      document.getElementsByClassName("remove_button_admin")[0].classList.remove('show');
     }
   }
 </script>
@@ -231,13 +143,13 @@ function show() {
     margin: 15px auto;
   }
 
-  .add_button:hover, .remove_button:hover {
+  .add_button:hover, .remove_button_admin:hover {
     background-color: #32A600;
     border: 2px solid #32A600;
     color: white;
   }
 
-  .remove_button {
+  .remove_button_admin {
     top: 60px;
     left: 125px;
     color: #564E4D;
@@ -252,6 +164,31 @@ function show() {
     font-size: 10px;
     margin: 15px auto;
   }
+
+  .hidden {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .search_bar {
+    width: 100px;
+    box-sizing: border-box;
+    border: 2px solid #564E4D;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 20px 12px 40px;
+    margin-left: 15px;
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    width: 300px;
+    border: 3px solid #564E4D;
+  }
+
   div.header {
     align-items: center;
   }
@@ -277,14 +214,6 @@ function show() {
     left: 10px;
     width: 100px;
     height: auto;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .show {
-    display: block;
   }
 
   .search_bar {
@@ -353,7 +282,7 @@ h1 {
   margin: 50px auto;
 }
 
-.insert_button img{
+.remove_button img{
   /*background-color: #32A600;*/
   display: inline-block;
   height: 300px;
@@ -363,22 +292,23 @@ h1 {
 }
 
 #bar_before:hover{
-  content: url('/static/images/bar_hover.png');
+  background-color: red;
 }
 
 #beer_before:hover  {
-  content: url('/static/images/beer_hover.png');
+  background-color: red;
 }
 
 #beer_food_before:hover {
-  content: url('/static/images/beer_food_hover.png');
+  background-color: red;
 }
 
 #brewery_before:hover {
-  content: url('/static/images/brewery_hover.png');
+  background-color: red;
 }
 
-.brewery_insert_form, .bar_insert_form, .beer_food_insert_form, .beer_insert_form{
+.brewery_remove_form, .bar_remove_form, .beer_food_remove_form, .beer_remove_form{
+  display: none;
   color: #564E4D;
   font-size: 300%;
   text-align: center;
@@ -438,6 +368,22 @@ input[type=submit] {
     border: 3px solid #564E4D;
     color: #564E4D;
     font-size: 50px;
+}
+
+input[type="radio"] {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display:block;
+    background-color: #32A600;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 </style>
