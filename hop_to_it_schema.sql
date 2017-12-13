@@ -1,6 +1,6 @@
 CREATE TABLE BREWERY
 (
-	brewery_id INT(30) NOT NULL AUTO_INCREMENT,
+	brewery_id INT(30) NOT NULL,
 	name VARCHAR(30) NOT NULL,
 	date_established DATE,
 	phone_number VARCHAR(15),
@@ -10,6 +10,7 @@ CREATE TABLE BREWERY
 	state VARCHAR(50),
 	zipcode CHAR(12),
 	region_id INT(9) NOT NULL,
+  beer_count INT(9),
 	history_description LONGTEXT,
 	PRIMARY KEY(brewery_id)
 );
