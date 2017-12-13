@@ -132,7 +132,7 @@ CREATE TABLE users (
 
 CREATE TABLE BEER_FOR_SALE
 (
-	sales_id CHAR(50) NOT NULL,
+	sales_id INT(50) NOT NULL,
 	beer_id INT(10) NOT NULL,
 	PRIMARY KEY (sales_id, beer_id)
 );
@@ -185,7 +185,7 @@ CREATE TRIGGER BreweryBeerCountDecrement AFTER DELETE ON Beer
   BEGIN
     UPDATE brewery
     SET beer_count = beer_count - 1
-    WHERE brewery_id = new.brewery_id;
+    WHERE brewery_id = deleted.brewery_id;
   END;
 //
 delimiter ;

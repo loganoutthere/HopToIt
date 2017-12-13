@@ -158,8 +158,8 @@ def insert_brewery():
 	region_id = request.form.get("region_id")
 	history_description = request.form["history_description"]
 
-	insert_query = "INSERT INTO BREWERY (brewery_id, name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
-	db_cursor.execute(insert_query, (random.randint(21,101), str(name), str(date_established), str(phone_number), str(website), str(city), str(country), str(state), int(zipcode), int(region_id), str(history_description)))
+	insert_query = "INSERT INTO BREWERY (name, date_established, phone_number, website, city, country, state, zipcode, region_id, history_description) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+	db_cursor.execute(insert_query, (str(name), str(date_established), str(phone_number), str(website), str(city), str(country), str(state), int(zipcode), int(region_id), str(history_description)))
 	db.commit()
 
 	return render_template('insert.html')
@@ -176,8 +176,8 @@ def insert_beer():
 	price_range_code = request.form.get("price_range_code")
 	brewery_id = request.form["brewery_id"]
 
-	insert_query = "INSERT INTO BEER (beer_id, beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
-	db_cursor.execute(insert_query, (random.randint(21,101), str(beer_name), (alcohol_by_volume), (ibu_rank), (standard_reference_method), int(style_id), int(time_of_year_availability_id), int(price_range_code), int(brewery_id)))
+	insert_query = "INSERT INTO BEER (beer_name, alcohol_by_volume, ibu_rank, standard_reference_method, style_id, time_of_year_availability_id, price_range_code, brewery_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+	db_cursor.execute(insert_query, (str(beer_name), (alcohol_by_volume), (ibu_rank), (standard_reference_method), int(style_id), int(time_of_year_availability_id), int(price_range_code), int(brewery_id)))
 	db.commit()
 
 	return render_template('insert.html')
@@ -187,8 +187,8 @@ def insert_beer_food():
 	db_cursor = db.cursor()
 	food_type = request.form["food_type"]
 
-	insert_query = "INSERT INTO FOOD_PAIRING(food_id, food_type) VALUES (%s, %s);"
-	db_cursor.execute(insert_query, (random.randint(21,101), str(food_type)))
+	insert_query = "INSERT INTO FOOD_PAIRING(food_type) VALUES (%s);"
+	db_cursor.execute(insert_query, (str(food_type)))
 	db.commit()
 
 	return render_template('insert.html')
@@ -204,8 +204,8 @@ def insert_bar():
 	website_url = request.form["website_url"]
 	phone_number = request.form.get("phone_number")
 
-	insert_query = "INSERT INTO BAR(bar_id, bar_name, city, state, country, zipcode, website_url, phone_number) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
-	db_cursor.execute(insert_query, (random.randint(21,101), str(bar_name), str(city), str(state), str(country), int(zipcode), str(website_url), str(phone_number)))
+	insert_query = "INSERT INTO BAR(bar_name, city, state, country, zipcode, website_url, phone_number) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+	db_cursor.execute(insert_query, (str(bar_name), str(city), str(state), str(country), int(zipcode), str(website_url), str(phone_number)))
 	db.commit()
 
 	return render_template('insert.html')
@@ -246,17 +246,54 @@ def search_post():
 
 @app.route('/breweries/')
 def breweries():
+	# db_cursor = db.cursor()
+	# # data = db_cursor.fetchone()
+	# db_cursor.execute("Select * from Brewery")
+	# headers=[header[0] for header in db_cursor.description] #return headers with values
+	# data = db_cursor.fetchall()
+	# json_data=[]
+	# for attribute in data:
+	# 	json_data.append(dict(zip(headers,attribute)))
+	# # return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
+	# return render_template('breweries.html', data=(json_data))
+	# # return  jsonify(data)
 	db_cursor = db.cursor()
-	# data = db_cursor.fetchone()
-	db_cursor.execute("Select * from Brewery")
+	query_list = []
+	breweries = "Select * from Brewery;"
+	query_list.append(breweries)
+	regions = "Select * from Region;"
+	query_list.append(regions)
+
+	brewery_data = []
+	regions_data = []
+
+	for query in range(0, len(query_list)):
+		db_cursor.execute(query_list[query])
+		headers=[header[0] for header in db_cursor.description] #return headers with values
+		data = db_cursor.fetchall()
+		for attribute in data:
+			if query == 0:
+				brewery_data.append(dict(zip(headers,attribute)))
+			else:
+				regions_data.append(dict(zip(headers,attribute)))
+
+	return render_template('breweries.html', breweries=(brewery_data), regions=(regions_data))
+
+@app.route('/breweries/filter_by/', methods=['GET', 'POST'])
+def filter_breweries():
+	db_cursor = db.cursor()
+	region_id = request.form.get("region_id")
+	print region_id
+	filter_query = "Select name From Brewery Where region_id=%s;"
+	db_cursor.execute(filter_query, (int(region_id)))
+
 	headers=[header[0] for header in db_cursor.description] #return headers with values
 	data = db_cursor.fetchall()
 	json_data=[]
 	for attribute in data:
 		json_data.append(dict(zip(headers,attribute)))
-	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
-	return render_template('breweries.html', data=(json_data))
-	# return  jsonify(data)
+	return render_template('breweries.html', breweries=(json_data))
+	# return render_template('breweries.html', breweries=(brewery_data), regions=(regions_data))
 
 @app.route('/beers/')
 def beers():

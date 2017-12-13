@@ -33,9 +33,9 @@
    </div>
    <div class="brewery_list">
      <h1 class="breweries_header">Breweries</h1>
-
-     <!-- <div style="padding: 20px;">
-       <form action="/admin/insert/brewery" method=post class="brewery_insert_form">
+     <h3>Filter by:</h3>
+     <div style="padding: 20px;">
+       <form action="/breweries/filter_by/" method=post class="brewery_filter_by">
          Region:
          <select name="region_id">
            <option value="" disabled selected hidden></option>
@@ -43,24 +43,11 @@
            <option value="{{r.region_id}}">{{r.region_name}}: {{r.region_states}}</option>
           {% endfor %}
          </select>
-         City:
-         <input name="city" type="text">
-         State:
-         <input name="state" type="text">
-         Country:
-         <select id="country" name="country">
-           <option value="United States">United States</option>
-         </select>
-         Zipcode:
-         <input name="zipcode" type="text">
-         <br>
          <input type="submit">
        </form>
      </div>
- -->
-
      <hr>
-      {% for d in data %}
+      {% for d in breweries %}
          <h1>
            <div class="dropdown">
               <img class="brewery_photo" src="/static/images/brewery_logo.png" alt="Brewery Logo" align="center">
@@ -105,6 +92,17 @@
    }
  </script>
 <style>
+  input[type=submit] {
+      border: 2px solid #564E4D;
+      color: #564E4D;
+      font-size: 10px;
+  }
+  input[type=submit]:hover {
+      border: 2px solid #32A600;
+      color: #32A600;
+      font-size: 10px;
+  }
+
   .brewery_insert_form {
     color: #564E4D;
     font-size: 300%;
