@@ -164,3 +164,28 @@ ALTER TABLE BEER_FOR_SEASON ADD CONSTRAINT FOREIGN KEY (time_of_year_availabilit
 
 ALTER TABLE LIKES ADD CONSTRAINT FOREIGN KEY (beer_id) REFERENCES BEER(beer_id);
 ALTER TABLE LIKES ADD CONSTRAINT FOREIGN KEY (username) REFERENCES PERSON(username);
+
+
+DROP TRIGGER IF EXISTS BreweryBeerCountIncrement;
+delimiter //
+CREATE TRIGGER BreweryBeerCountIncrement AFTER INSERT ON Beer
+  FOR EACH ROW
+  BEGIN
+    UPDATE brewery
+    SET beer_count = beer_count + 1
+    WHERE brewery_id = new.brewery_id;
+  END;
+//
+delimiter ;
+
+DROP TRIGGER IF EXISTS BreweryBeerCountDecrement;
+delimiter //
+CREATE TRIGGER BreweryBeerCountDecrement AFTER DELETE ON Beer
+  FOR EACH ROW
+  BEGIN
+    UPDATE brewery
+    SET beer_count = beer_count - 1
+    WHERE brewery_id = new.brewery_id;
+  END;
+//
+delimiter ;
