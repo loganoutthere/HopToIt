@@ -1,6 +1,6 @@
 CREATE TABLE BREWERY
 (
-	brewery_id INT(30) NOT NULL,
+	brewery_id INT(30) NOT NULL AUTO_INCREMENT,
 	name VARCHAR(30) NOT NULL,
 	date_established DATE,
 	phone_number VARCHAR(15),
