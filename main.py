@@ -15,13 +15,16 @@ app = Flask(__name__)
 def hello():
 	return render_template('home.html')
 
+#Login test ------------------------------------
 @app.route('/login/')
-def login():
+def loginSysL():
 	return render_template('user_systems/login.php')
 
-@app.route('/register/')
-def register():
-	return render_template('user_systems/registrer.php')
+@app.route('/welcome')
+def welcomeBiches():
+	return render_template('user_systems/welcome.php')
+
+#----------------------------------------------
 
 @app.route('/advanced_search/')
 def advanced_search():
@@ -207,20 +210,24 @@ def insert_bar():
 
 	return render_template('insert.html')
 
-@app.route('/admin/login/')
-def admin_login():
-	username = request.form.get('username')
-	password = request.form.get('password')
-	db_cursor = db.cursor()
-	username_query = ("Select * from Person where username = '{}';".format(username))
-	password_query = ("Select * from Person where password = '{}';".format(password))
-	db_cursor.execute(query)
-	headers=[header[0] for header in db_cursor.description] #return headers with values
-	data = db_cursor.fetchall()
-	json_data=[]
-	for attribute in data:
-		json_data.append(dict(zip(headers,attribute)))
-	return render_template('admin_login.html', data=(json_data))
+# @app.route('/admin/login/')
+# def admin_login():
+# 	username = request.form.get('username')
+# 	password = request.form.get('password')
+# 	db_cursor = db.cursor()
+# 	username_query = ("Select username from users where username = '{}';".format(username))
+# 	password_query = ("Select password from users where password = '{}';".format(password))
+#
+# 	if username == username_query and password == password_query:
+# 		db_cursor.execute(query)
+# 		headers=[header[0] for header in db_cursor.description] #return headers with values
+# 		data = db_cursor.fetchall()
+# 		json_data=[]
+# 		for attribute in data:
+# 			json_data.append(dict(zip(headers,attribute)))
+# 		return render_template('admin_login.html', data=(json_data))
+# 	else:
+# 		return render_template('login_error.html')
 
 
 @app.route('/search/', methods=['POST'])

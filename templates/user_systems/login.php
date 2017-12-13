@@ -19,24 +19,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   // Check if password is empty
-  if(empty(trim($_POST["password"]))){
+  if(empty(trim($_POST["pass"]))){
     $password_err = 'Please enter your password.';
   }
   else {
-    $password = trim($_POST['password']);
+    $password = trim($_POST['pass']);
   }
 
   // Validate credentials
   if(empty($username_err) && empty($password_err)){
     //Prepare a select statement
-    $sql = "SELECT username, password FROM users WHERE username = ?";
+    $sql = "SELECT username, pass FROM users WHERE username = '".$username."'";
 
     if($stmt = mysqli_prepare($link, $sql)){
       //Bind varables to prepared statement as paramaters
-      mysqli_stmt_bind_param($stmt, "s", $param_username);
+      //mysqli_stmt_bind_param($stmt, "s", $param_username);
 
       //Set paramaters
-      $param_username = $username;
+      //$param_username = $username;
 
       // Attempt to execute the prepared statement
       if(mysqli_stmt_execute($stmt)){
@@ -46,9 +46,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         //Check if username exists, if yes then verify password
         if(mysqli_stmt_num_rows($stmt) == 1){
           //Bind result variables
-          mysqli_stmt_bind_result($stmt, $username, $hashed_password);
+          //mysqli_stmt_bind_result($stmt, $username, $hashed_password);
+          $hash =password_hash($password, PASSWORD_DEFAULT);
           if(mysqli_stmt_fetch($stmt)){
-            if(password_verify($password, $hashed_password)){
+            if(password_verify($password, $hash)){
               /* Password is correct, so start a new session and
               save the username to the session */
               session_start();
@@ -76,7 +77,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   //close connection
   mysqli_close($link);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -102,13 +102,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </div>
       <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
         <label>Password:<sup>*</sup></label>
-        <input type="password" name="password" class="form-control">
+        <input type="password" name="pass" class="form-control">
         <span class="help-block"><?php echo $password_err; ?></span>
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Submit">
       </div>
-      <p>Don't have an account? <a href="registrer.php">Sign up now</a>.</p>
     </form>
   </div>
 </body>
