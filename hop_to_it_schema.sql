@@ -10,7 +10,7 @@ CREATE TABLE BREWERY
 	state VARCHAR(50),
 	zipcode CHAR(12),
 	region_id INT(9) NOT NULL,
-  beer_count INT(9),
+  beer_count INT(9) DEFAULT 0,
 	history_description LONGTEXT,
 	PRIMARY KEY(brewery_id)
 );
