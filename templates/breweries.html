@@ -33,6 +33,32 @@
    </div>
    <div class="brewery_list">
      <h1 class="breweries_header">Breweries</h1>
+
+     <!-- <div style="padding: 20px;">
+       <form action="/admin/insert/brewery" method=post class="brewery_insert_form">
+         Region:
+         <select name="region_id">
+           <option value="" disabled selected hidden></option>
+           {% for r in regions %}
+           <option value="{{r.region_id}}">{{r.region_name}}: {{r.region_states}}</option>
+          {% endfor %}
+         </select>
+         City:
+         <input name="city" type="text">
+         State:
+         <input name="state" type="text">
+         Country:
+         <select id="country" name="country">
+           <option value="United States">United States</option>
+         </select>
+         Zipcode:
+         <input name="zipcode" type="text">
+         <br>
+         <input type="submit">
+       </form>
+     </div>
+ -->
+
      <hr>
       {% for d in data %}
          <h1>
@@ -79,6 +105,20 @@
    }
  </script>
 <style>
+  .brewery_insert_form {
+    color: #564E4D;
+    font-size: 300%;
+    text-align: center;
+    margin: 50px auto;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #564E4D;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+
   .add_button {
     color: #564E4D;
     text-align: center;

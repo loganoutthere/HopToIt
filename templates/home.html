@@ -21,7 +21,7 @@
     <img class="admin_button" src='/static/images/hops.png' onclick="show()">
   </div>
   <div>
-    <h1 align='center'>"Beer is living proof that God loves us and wants us to be happy!"</h1>
+    <!-- <h1 align='center'>"Beer is living proof that God loves us and wants us to be happy!"</h1> -->
   </div>
   <div class="topnav">
     <a href="/home/">Home</a>
@@ -31,7 +31,31 @@
     <a href="/mission/">Mission</a>
     <a href="/about/">About</a>
   </div>
-  <img class="graphic" src='/static/images/hop_to_it_graphic.png' width="300" height=auto>
+  <img class="graphic" src='/static/images/hop_to_it_graphic.png' width="300" height="auto">
+  <h2>Hop To It is an online beer database founded in the heart <br> of the Rocky Mountains with one goal. <br>
+    Spread our love of beer. <br>  <br> Users can search <br>
+    and find out all about their favorite beers <br> and discover new ones.
+  </h2>
+  <div class="footer">
+    <a href="/home/">
+      <img class="footer_img" src='/static/images/test.png'>
+    </a>
+    <a href="/home/" style="text-decoration:none;">
+      <h1 class='footer_link'>www.HopToIt.com</h1>
+    </a>
+    <a href="/about/" style="text-decoration:none;">
+      <h1 class='footer_link'>Contact Us</h1>
+    </a>
+    <h1 class='footer_link'>Follow Us</h1>
+    <div>
+      <a href="http://www.facebook.com">
+        <img src='/static/images/facebook.png' width=60px height=90px class="social_media">
+      </a>
+      <a href="http://www.instagram.com">
+        <img src='/static/images/instagram.png' width=60px height=60px class="social_media">
+      </a>
+    </div>
+  </div>
 <script>
 function show() {
     if (document.getElementsByClassName("add_button")[0].classList.contains('hidden') == true){
@@ -52,6 +76,60 @@ function show() {
 </script>
 
 <style>
+
+h2 {
+  color: #564E4D;
+  font-size: 300%;
+  text-align: center;
+  /*background-color: #564E4D;*/
+  border-radius: 5%;
+  border: 6px solid #32A600;
+  margin: 50px;
+}
+.footer_link:hover {
+  text-shadow: 1px 1px 2px #32A600;
+  color: white;
+}
+
+.social_media:hover {
+  /*background-color: white;*/
+  border-radius: 5%;
+  border: 6px solid white;
+  border-width: thin;
+}
+
+.footer_img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.footer {
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  display: block;
+}
+
+.footer_link {
+  bottom: 800px;
+  color: #32A600;
+  text-align: center;
+  position: relative;
+  font-size: 50px;
+  margin: auto auto;
+  padding: 5px;
+  display: block;
+}
+
+.social_media {
+  display: inline-block;
+  margin: auto auto;
+  bottom: 815px;
+  left: 650px;
+  position: relative;
+  padding-bottom: 25px;
+}
 
 .add_button {
   color: #564E4D;
@@ -147,7 +225,7 @@ function show() {
     margin: auto;
     width: 50%;
     height: auto;
-    padding: 10px;
+    /*padding: 10px;*/
   }
 
   .button {
