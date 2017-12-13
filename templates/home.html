@@ -2,23 +2,26 @@
 <html>
 <head>
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-  <link type="text/css" rel="stylesheet" href="style.css"/>
+  <!-- <link type="text/css" rel="stylesheet" href="style.css"/> -->
 </head>
 <body>
   <div class="header" style="margin: 0 auto;">
-    <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
-    <!-- <form action="/search/" method="POST">
-      <input type="text" name="search" placeholder="Search.." value="{{request.data.search}}">
-    </form> -->
-    <form method="POST" action="/search/">
-      <input name="text" placeholder="Search..">
+    <form action="/admin/insert/">
+      <button class="add_button hidden">+</button>
     </form>
-    <a href="/admin/insert/">
-        <img class="admin_button" src='/static/images/hops.png'>
+    <form action="/admin/remove/">
+      <button class="remove_button hidden">-</button>
+    </form>
+    <a href="/home/">
+      <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
     </a>
+    <form method="POST" action="/search/">
+      <input name="text" placeholder="Search.." class="search_bar">
+    </form>
+    <img class="admin_button" src='/static/images/hops.png' onclick="show()">
   </div>
   <div>
-    <h1 align='center'>Beer is living proof that God loves us and wants us to be happy!</h1>
+    <!-- <h1 align='center'>"Beer is living proof that God loves us and wants us to be happy!"</h1> -->
   </div>
   <div class="topnav">
     <a href="/home/">Home</a>
@@ -28,10 +31,152 @@
     <a href="/mission/">Mission</a>
     <a href="/about/">About</a>
   </div>
+  <img class="graphic" src='/static/images/hop_to_it_graphic.png' width="300" height="auto">
+  <h2>Hop To It is an online beer database founded in the heart <br> of the Rocky Mountains with one goal. <br>
+    Spread our love of beer. <br>  <br> Users can search <br>
+    and find out all about their favorite beers <br> and discover new ones.
+  </h2>
+  <div class="footer">
+    <a href="/home/">
+      <img class="footer_img" src='/static/images/test.png'>
+    </a>
+    <a href="/home/" style="text-decoration:none;">
+      <h1 class='footer_link'>www.HopToIt.com</h1>
+    </a>
+    <a href="/about/" style="text-decoration:none;">
+      <h1 class='footer_link'>Contact Us</h1>
+    </a>
+    <h1 class='footer_link'>Follow Us</h1>
+    <div>
+      <a href="http://www.facebook.com">
+        <img src='/static/images/facebook.png' width=60px height=90px class="social_media">
+      </a>
+      <a href="http://www.instagram.com">
+        <img src='/static/images/instagram.png' width=60px height=60px class="social_media">
+      </a>
+    </div>
+  </div>
 <script>
+function show() {
+    if (document.getElementsByClassName("add_button")[0].classList.contains('hidden') == true){
+      document.getElementsByClassName("add_button")[0].classList.remove('hidden');
+      document.getElementsByClassName("add_button")[0].classList.add('show');
+    } else {
+      document.getElementsByClassName("add_button")[0].classList.add('hidden');
+      document.getElementsByClassName("add_button")[0].classList.remove('show');
+    }
+    if (document.getElementsByClassName("remove_button")[0].classList.contains('hidden') == true) {
+      document.getElementsByClassName("remove_button")[0].classList.remove('hidden');
+      document.getElementsByClassName("remove_button")[0].classList.add('show');
+    } else {
+      document.getElementsByClassName("remove_button")[0].classList.add('hidden');
+      document.getElementsByClassName("remove_button")[0].classList.remove('show');
+    }
+  }
 </script>
 
 <style>
+
+h2 {
+  color: #564E4D;
+  font-size: 300%;
+  text-align: center;
+  /*background-color: #564E4D;*/
+  border-radius: 5%;
+  border: 6px solid #32A600;
+  margin: 50px;
+}
+.footer_link:hover {
+  text-shadow: 1px 1px 2px #32A600;
+  color: white;
+}
+
+.social_media:hover {
+  /*background-color: white;*/
+  border-radius: 5%;
+  border: 6px solid white;
+  border-width: thin;
+}
+
+.footer_img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.footer {
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  display: block;
+}
+
+.footer_link {
+  bottom: 800px;
+  color: #32A600;
+  text-align: center;
+  position: relative;
+  font-size: 50px;
+  margin: auto auto;
+  padding: 5px;
+  display: block;
+}
+
+.social_media {
+  display: inline-block;
+  margin: auto auto;
+  bottom: 815px;
+  left: 650px;
+  position: relative;
+  padding-bottom: 25px;
+}
+
+.add_button {
+  color: #564E4D;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  top: 150px;
+  left: 40px;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #564E4D;
+  font-size: 10px;
+  margin: 15px auto;
+}
+
+.add_button:hover, .remove_button:hover {
+  background-color: #32A600;
+  border: 2px solid #32A600;
+  color: white;
+}
+
+.remove_button {
+  top: 60px;
+  left: 125px;
+  color: #564E4D;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #564E4D;
+  font-size: 10px;
+  margin: 15px auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
   div.header {
     align-items: center;
   }
@@ -75,6 +220,14 @@
     height: auto;
   }
 
+  .graphic {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: auto;
+    /*padding: 10px;*/
+  }
+
   .button {
       background-color: white;
       color: #564E4D;
@@ -111,7 +264,7 @@
 }
 
 .topnav a:hover {
-  border-bottom: 3px solid #564E4D;
+  border-bottom: 3px solid #32A600;
 }
 
 .topnav a.active {

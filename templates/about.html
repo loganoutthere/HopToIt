@@ -2,17 +2,26 @@
 <html>
 <head>
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
-  <link type="text/css" rel="stylesheet" href="style.css"/>
+  <!-- <link type="text/css" rel="stylesheet" href="style.css"/> -->
 </head>
 <body>
   <div class="header" style="margin: 0 auto;">
-    <img class="logo" src='/static/images/hop_to_it_logo.jpg' width="300" height=auto>
-    <form method="POST" action="/search/">
-      <input name="text" placeholder="Search..">
+    <form action="/admin/insert/">
+      <button class="add_button hidden">+</button>
     </form>
+    <form action="/admin/remove/">
+      <button class="remove_button hidden">-</button>
+    </form>
+    <a href="/home/">
+      <img class="logo" src='/static/images/hop_to_it_new_logo.png' width="300" height=auto>
+    </a>
+    <form method="POST" action="/search/">
+      <input name="text" placeholder="Search.." class="search_bar">
+    </form>
+    <img class="admin_button" src='/static/images/hops.png' onclick="show()">
   </div>
   <div>
-    <h1 align='center'>Beer is living proof that God loves us and wants us to be happy!</h1>
+    <h1 align='center'>"Beer is living proof that God loves us and wants us to be happy!"</h1>
   </div>
   <div class="topnav">
     <a href="/home/">Home</a>
@@ -23,15 +32,76 @@
     <a href="/about/">About</a>
   </div>
   <div>
-    <h1>About Hop To It</h1>
+    <h1 style="color: #32A600; font-size: 100px;">About Hop To It</h1>
     <h3>Hop To It was founded with one goal. <br/> Spread our love of beer. <br/>
       Hop To It is an online beer database that users can search  <br/> and find out all about their favorite beers <br/>
       and discover new ones.</h3>
   </div>
 <script>
+function show() {
+    if (document.getElementsByClassName("add_button")[0].classList.contains('hidden') == true){
+      document.getElementsByClassName("add_button")[0].classList.remove('hidden');
+      document.getElementsByClassName("add_button")[0].classList.add('show');
+    } else {
+      document.getElementsByClassName("add_button")[0].classList.add('hidden');
+      document.getElementsByClassName("add_button")[0].classList.remove('show');
+    }
+    if (document.getElementsByClassName("remove_button")[0].classList.contains('hidden') == true) {
+      document.getElementsByClassName("remove_button")[0].classList.remove('hidden');
+      document.getElementsByClassName("remove_button")[0].classList.add('show');
+    } else {
+      document.getElementsByClassName("remove_button")[0].classList.add('hidden');
+      document.getElementsByClassName("remove_button")[0].classList.remove('show');
+    }
+  }
 </script>
 
 <style>
+  .add_button {
+    color: #564E4D;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+    left: 40px;
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #564E4D;
+    font-size: 10px;
+    margin: 15px auto;
+  }
+
+  .add_button:hover, .remove_button:hover {
+    background-color: #32A600;
+    border: 2px solid #32A600;
+    color: white;
+  }
+
+  .remove_button {
+    top: 60px;
+    left: 125px;
+    color: #564E4D;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #564E4D;
+    font-size: 10px;
+    margin: 15px auto;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
   div.header {
     align-items: center;
   }
@@ -48,6 +118,15 @@
     margin: 0 left;
     position: static;
     top: 100px;
+  }
+
+  .admin_button {
+    margin-left: 15px;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    width: 100px;
+    height: auto;
   }
 
   input[name='text'] {
