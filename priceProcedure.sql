@@ -1,4 +1,4 @@
-#--to call CALL ChangePrice([Beer_id you want to change], [the new price_range_code])
+--to call CALL ChangePrice([Beer_id you want to change], [the new price_range_code])
 
 DROP PROCEDURE IF EXISTS ChangePrice;
 delimiter //

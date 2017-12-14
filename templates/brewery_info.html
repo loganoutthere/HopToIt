@@ -42,7 +42,7 @@
         <h3 align="center">{{ d.history_description }}</h3>
         <div class="tab">
           <form action="/beers/{{ d.name }}/" method="get">
-              <button id="beers_list" class="beers_button" onclick="show_beers()">Beers</button>
+              <button id="beers_list" class="beers_button" onclick="show_beers()">Beers: {{d.beer_count}}</button>
           </form>
      {% endfor %}
    </div>

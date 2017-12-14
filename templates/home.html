@@ -32,29 +32,25 @@
     <a href="/about/">About</a>
   </div>
   <img class="graphic" src='/static/images/hop_to_it_graphic.png' width="300" height="auto">
-  <h2>Hop To It is an online beer database founded in the heart <br> of the Rocky Mountains with one goal. <br>
-    Spread our love of beer. <br>  <br> Users can search <br>
-    and find out all about their favorite beers <br> and discover new ones.
+  <h2 class="top">Hop To It is an online beer database founded in the heart <br> of the Rocky Mountains with one goal. <br>
+    Spread our love of beer.<br></h2>
   </h2>
+  <div>
+    <img class="footer_img" src='/static/images/test.png'>
+  </div>
   <div class="footer">
-    <a href="/home/">
-      <img class="footer_img" src='/static/images/test.png'>
-    </a>
     <a href="/home/" style="text-decoration:none;">
       <h1 class='footer_link'>www.HopToIt.com</h1>
     </a>
     <a href="/about/" style="text-decoration:none;">
       <h1 class='footer_link'>Contact Us</h1>
     </a>
-    <h1 class='footer_link'>Follow Us</h1>
-    <div>
-      <a href="http://www.facebook.com">
-        <img src='/static/images/facebook.png' width=60px height=90px class="social_media">
-      </a>
-      <a href="http://www.instagram.com">
-        <img src='/static/images/instagram.png' width=60px height=60px class="social_media">
-      </a>
-    </div>
+    <a href="http://www.facebook.com">
+      <img src='/static/images/facebook.png' width=75px height=90px class="social_media">
+    </a>
+    <a href="http://www.instagram.com">
+      <img src='/static/images/instagram.png' width=60px height=60px class="social_media">
+    </a>
   </div>
 <script>
 function show() {
@@ -82,9 +78,9 @@ h2 {
   font-size: 300%;
   text-align: center;
   /*background-color: #564E4D;*/
-  border-radius: 5%;
+  border-radius: 0%;
   border: 6px solid #32A600;
-  margin: 50px;
+  width: 100%;
 }
 .footer_link:hover {
   text-shadow: 1px 1px 2px #32A600;
@@ -101,34 +97,33 @@ h2 {
 .footer_img {
   width: 100%;
   height: auto;
-  display: block;
+  position: absolute;
 }
 
 .footer {
   width: 100%;
-  height: auto;
-  bottom: 0;
-  display: block;
+  position: absolute;
+  margin-top:600px;
 }
 
 .footer_link {
-  bottom: 800px;
   color: #32A600;
   text-align: center;
-  position: relative;
   font-size: 50px;
-  margin: auto auto;
-  padding: 5px;
-  display: block;
+  /* margin: auto auto; */
+  /* padding: 5px; */
+  /* display: block; */
 }
 
 .social_media {
-  display: inline-block;
-  margin: auto auto;
-  bottom: 815px;
-  left: 650px;
-  position: relative;
-  padding-bottom: 25px;
+  display: block;
+  padding-bottom: 15px;
+  margin: auto;
+  /* position: fixed; */
+  /* bottom: 700px; */
+  /* left: 615px; */
+  /* position: relative; */
+  /* padding-bottom: 25px; */
 }
 
 .add_button {

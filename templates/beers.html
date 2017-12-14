@@ -33,6 +33,22 @@
    </div>
    <div class="beers_list">
      <h1 class="beers_header">{{brewery}} Beers</h1>
+     <h3>Filter by:</h3>
+     <div style="padding: 20px;">
+       <form action="/beers/filter_by/" method=post class="beers_filter_by">
+         Style:
+         <select name="style_id">
+           <option value="display_all" disabled selected hidden></option>
+           {% for s in styles %}
+           <option value="{{s.style_id}}">{{s.style_name}}</option>
+          {% endfor %}
+         </select>
+         <input type="submit">
+       </form>
+       <form action="/beers/" class="beers_filter_by">
+         <input type="submit" value="&#9664;">
+       </form>
+     </div>
      <hr>
       {% for b in beers %}
          <h1>
@@ -81,6 +97,17 @@
    }
  </script>
 <style>
+
+  input[type=submit] {
+      border: 2px solid #564E4D;
+      color: #564E4D;
+      font-size: 10px;
+  }
+  input[type=submit]:hover {
+      border: 2px solid #32A600;
+      color: #32A600;
+      font-size: 10px;
+  }
   .add_button {
     color: #564E4D;
     text-align: center;

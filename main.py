@@ -283,7 +283,6 @@ def breweries():
 def filter_breweries():
 	db_cursor = db.cursor()
 	region_id = request.form.get("region_id")
-	print region_id
 	filter_query = "Select name From Brewery Where region_id=%s;"
 	db_cursor.execute(filter_query, (int(region_id)))
 
@@ -295,6 +294,21 @@ def filter_breweries():
 	return render_template('breweries.html', breweries=(json_data))
 	# return render_template('breweries.html', breweries=(brewery_data), regions=(regions_data))
 
+@app.route('/beers/filter_by/', methods=['GET', 'POST'])
+def filter_beers():
+	db_cursor = db.cursor()
+	style_id = request.form.get("style_id")
+	filter_query = "Select beer_name From Beer Where style_id=%s;"
+	db_cursor.execute(filter_query, (int(style_id)))
+
+	headers=[header[0] for header in db_cursor.description] #return headers with values
+	data = db_cursor.fetchall()
+	json_data=[]
+	for attribute in data:
+		json_data.append(dict(zip(headers,attribute)))
+	return render_template('beers.html', beers=(json_data))
+	# return render_template('breweries.html', breweries=(brewery_data), regions=(regions_data))
+
 @app.route('/beers/')
 def beers():
 	db_cursor = db.cursor()
@@ -303,15 +317,32 @@ def beers():
 				FROM beer b INNER JOIN BEER_STYLE bs ON (b.style_id = bs.style_id)
 				INNER JOIN PRICE_RANGE pr ON (b.price_range_code = pr.price_range_code)
 				INNER JOIN BREWERY br ON (b.brewery_id = br.brewery_id);"""
-	db_cursor.execute(query)
-	headers=[header[0] for header in db_cursor.description] #return headers with values
-	data = db_cursor.fetchall()
-	json_data=[]
-	for attribute in data:
-		json_data.append(dict(zip(headers,attribute)))
-	# return render_template('brewery_info.html', data=json.dumps(json_data, default=date_handler))
-	return render_template('beers.html', beers=(json_data))
-	# return  jsonify(data)
+	# db_cursor.execute(query)
+	# headers=[header[0] for header in db_cursor.description] #return headers with values
+	# data = db_cursor.fetchall()
+	# json_data=[]
+	# for attribute in data:
+	# 	json_data.append(dict(zip(headers,attribute)))
+	# return render_template('beers.html', beers=(json_data))
+	query_list = []
+	query_list.append(query)
+	styles = "Select * from BEER_STYLE;"
+	query_list.append(styles)
+
+	beers_data = []
+	styles_data = []
+
+	for query in range(0, len(query_list)):
+		db_cursor.execute(query_list[query])
+		headers=[header[0] for header in db_cursor.description] #return headers with values
+		data = db_cursor.fetchall()
+		for attribute in data:
+			if query == 0:
+				beers_data.append(dict(zip(headers,attribute)))
+			else:
+				styles_data.append(dict(zip(headers,attribute)))
+
+	return render_template('beers.html', beers=(beers_data), styles=(styles_data))
 
 @app.route('/bars/')
 def bars():

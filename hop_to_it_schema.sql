@@ -180,12 +180,29 @@ delimiter ;
 
 DROP TRIGGER IF EXISTS BreweryBeerCountDecrement;
 delimiter //
-CREATE TRIGGER BreweryBeerCountDecrement AFTER DELETE ON Beer
+CREATE TRIGGER BreweryBeerCountDecrement BEFORE DELETE ON Beer
   FOR EACH ROW
   BEGIN
     UPDATE brewery
     SET beer_count = beer_count - 1
-    WHERE brewery_id = deleted.brewery_id;
+    WHERE brewery_id = old.brewery_id;
   END;
 //
 delimiter ;
+
+DROP PROCEDURE IF EXISTS ChangePrice;
+delimiter //
+CREATE PROCEDURE ChangePrice (IN BeerIN INT(10),IN NewRange INT(9) )
+BEGIN
+  UPDATE BEER set price_range_code = NewRange WHERE beer_id = BeerIN;
+END;
+//
+delimiter ;
+
+DROP VIEW IF EXISTS Best;
+CREATE VIEW Best AS(
+SELECT BREWERY.brewery_id, BEER.beer_id
+FROM BREWERY
+JOIN BEER ON BREWERY.brewery_id = BEER.beer_id);
+
+-- SELECT * FROM Best;

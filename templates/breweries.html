@@ -38,12 +38,15 @@
        <form action="/breweries/filter_by/" method=post class="brewery_filter_by">
          Region:
          <select name="region_id">
-           <option value="" disabled selected hidden></option>
+           <option value="display_all" disabled selected hidden></option>
            {% for r in regions %}
            <option value="{{r.region_id}}">{{r.region_name}}: {{r.region_states}}</option>
           {% endfor %}
          </select>
          <input type="submit">
+       </form>
+       <form action="/breweries/" class="brewery_filter_by">
+         <input type="submit" value="&#9664;">
        </form>
      </div>
      <hr>
@@ -55,7 +58,7 @@
              {{ d.name }}
               <div class="dropdown-content">
                 <div class="dropdown-content">
-                  <a href="/beers/{{d.name}}/">Beers</a>
+                  <a href="/beers/{{d.name}}/">Beers: {{d.beer_count}}</a>
                   <a href="/brewery_info/{{d.name}}">Information</a>
                   <a href=http://{{d.website}}>Website</a>
               </div>

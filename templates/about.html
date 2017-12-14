@@ -34,8 +34,25 @@
   <div>
     <h1 style="color: #32A600; font-size: 100px;">About Hop To It</h1>
     <h3>Hop To It was founded with one goal. <br/> Spread our love of beer. <br/>
-      Hop To It is an online beer database that users can search  <br/> and find out all about their favorite beers <br/>
+      Hop To It is an online beer database <br/> that users can search and find <br/> out all about their favorite beers <br/>
       and discover new ones.</h3>
+  </div>
+  <div>
+    <img class="footer_img" src='/static/images/test.png'>
+  </div>
+  <div class="footer">
+    <a href="/home/" style="text-decoration:none;">
+      <h1 class='footer_link'>www.HopToIt.com</h1>
+    </a>
+    <a href="/about/" style="text-decoration:none;">
+      <h1 class='footer_link'>Contact Us</h1>
+    </a>
+    <a href="http://www.facebook.com">
+      <img src='/static/images/facebook.png' width=75px height=90px class="social_media">
+    </a>
+    <a href="http://www.instagram.com">
+      <img src='/static/images/instagram.png' width=60px height=60px class="social_media">
+    </a>
   </div>
 <script>
 function show() {
@@ -57,6 +74,59 @@ function show() {
 </script>
 
 <style>
+h2 {
+  color: #564E4D;
+  font-size: 300%;
+  text-align: center;
+  /*background-color: #564E4D;*/
+  border-radius: 0%;
+  border: 6px solid #32A600;
+  width: 100%;
+}
+.footer_link:hover {
+  text-shadow: 1px 1px 2px #32A600;
+  color: white;
+}
+
+.social_media:hover {
+  /*background-color: white;*/
+  border-radius: 5%;
+  border: 6px solid white;
+  border-width: thin;
+}
+
+.footer_img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  margin-top:600px;
+}
+
+.footer_link {
+  color: #32A600;
+  text-align: center;
+  font-size: 50px;
+  /* margin: auto auto; */
+  /* padding: 5px; */
+  /* display: block; */
+}
+
+.social_media {
+  display: block;
+  padding-bottom: 15px;
+  margin: auto;
+  /* position: fixed; */
+  /* bottom: 700px; */
+  /* left: 615px; */
+  /* position: relative; */
+  /* padding-bottom: 25px; */
+}
+
   .add_button {
     color: #564E4D;
     text-align: center;
@@ -196,10 +266,12 @@ h1 {
 }
 
 h3 {
-  color: #564E4D;
+  color: white;
   font-size: 300%;
   margin-top: 45px;
   text-align: center;
+  background-color: #564E4D;
+  border: 3px solid #32A600;
 }
 
 </style>
